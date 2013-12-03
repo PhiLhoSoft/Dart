@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<dartKeyBindings version="1">
+<!--The format is straightforward, consisting of two attributes plus one that is optional.
+The required attributes are the command name, which is the same as it appears in
+menus, and the key sequence, which is all uppercase. The optional attribute is the
+name of the platform to which the binding applies if it is not universal.-->
+<keyBinding commandName="Activate Editor" keySequence="F12" platform="win32"/>
+<keyBinding commandName="Backward History" keySequence="ALT+ARROW_LEFT"/>
+<keyBinding commandName="Close" keySequence="CTRL+W"/>
+<keyBinding commandName="Close All" keySequence="CTRL+SHIFT+W"/>
+<keyBinding commandName="Close Glance" keySequence="ESC"/>
+<keyBinding commandName="Content Assist" keySequence="ALT+/"/>
+<keyBinding commandName="Content Assist" keySequence="CTRL+SPACE"/>
+<keyBinding commandName="Copy" keySequence="CTRL+C"/>
+<keyBinding commandName="Copy Lines" keySequence="ALT+CTRL+ARROW_DOWN"/>
+<keyBinding commandName="Cut" keySequence="CTRL+X"/>
+<keyBinding commandName="Cut to End of Line" keySequence="ALT+CTRL+SHIFT+DEL"/>
+<keyBinding commandName="Declaration in Workspace" keySequence="CTRL+SHIFT+D"/>
+<keyBinding commandName="Delete" keySequence="DEL"/>
+<keyBinding commandName="Delete Line" keySequence="CTRL+SHIFT+L"/>
+<keyBinding commandName="Delete Next Word" keySequence="CTRL+DEL"/>
+<keyBinding commandName="Delete Previous Word" keySequence="CTRL+BS"/>
+<keyBinding commandName="Delete to End of Line" keySequence="CTRL+SHIFT+DEL"/>
+<keyBinding commandName="Duplicate Lines" keySequence="CTRL+D"/>
+<keyBinding commandName="Extract Local Variable" keySequence="ALT+SHIFT+L" platform="win32"/>
+<keyBinding commandName="Extract Method" keySequence="ALT+SHIFT+M" platform="win32"/>
+<keyBinding commandName="Find Callers" keySequence="ALT+CTRL+H"/>
+<keyBinding commandName="Find Next" keySequence="CTRL+G"/>
+<keyBinding commandName="Find Next" keySequence="CTRL+K"/>
+<keyBinding commandName="Find Previous" keySequence="CTRL+SHIFT+G"/>
+<keyBinding commandName="Find Previous" keySequence="CTRL+SHIFT+K"/>
+<keyBinding commandName="Find and Replace" keySequence="CTRL+SHIFT+F"/>
+<keyBinding commandName="Format Element" keySequence="CTRL+SHIFT+R"/>
+<keyBinding commandName="Forward History" keySequence="ALT+ARROW_RIGHT"/>
+<keyBinding commandName="Generate JavaScript" keySequence="CTRL+SHIFT+G"/>
+<keyBinding commandName="Go to Line" keySequence="CTRL+L"/>
+<keyBinding commandName="Go to Matching Bracket" keySequence="CTRL+SHIFT+P"/>
+<keyBinding commandName="Inline" keySequence="ALT+SHIFT+I" platform="win32"/>
+<keyBinding commandName="Insert Line Above Current Line" keySequence="CTRL+SHIFT+CR"/>
+<keyBinding commandName="Insert Line Below Current Line" keySequence="SHIFT+CR"/>
+<keyBinding commandName="Join Lines" keySequence="ALT+CTRL+J"/>
+<keyBinding commandName="Line Down" keySequence="ARROW_DOWN"/>
+<keyBinding commandName="Line End" keySequence="END"/>
+<keyBinding commandName="Line Start" keySequence="HOME"/>
+<keyBinding commandName="Line Up" keySequence="ARROW_UP"/>
+<keyBinding commandName="Manage Launches" keySequence="CTRL+SHIFT+M"/>
+<keyBinding commandName="Maximize Active View or Editor" keySequence="CTRL+M"/>
+<keyBinding commandName="Move Lines Down" keySequence="ALT+ARROW_DOWN"/>
+<keyBinding commandName="Move Lines Up" keySequence="ALT+ARROW_UP"/>
+<keyBinding commandName="New File..." keySequence="CTRL+N"/>
+<keyBinding commandName="Next Column" keySequence="ARROW_RIGHT"/>
+<keyBinding commandName="Next Editor" keySequence="CTRL+F6"/>
+<keyBinding commandName="Next Tab" keySequence="CTRL+TAB"/>
+<keyBinding commandName="Next Word" keySequence="CTRL+ARROW_RIGHT"/>
+<keyBinding commandName="Open Class Hierarchy" keySequence="F4"/>
+<keyBinding commandName="Open Declaration" keySequence="F3"/>
+<keyBinding commandName="Open Existing Folder..." keySequence="CTRL+O"/>
+<keyBinding commandName="Open Glance" keySequence="CTRL+F"/>
+<keyBinding commandName="Open Structure" keySequence="CTRL+F3"/>
+<keyBinding commandName="Page Down" keySequence="PAGE_DOWN"/>
+<keyBinding commandName="Page Up" keySequence="PAGE_UP"/>
+<keyBinding commandName="Paste" keySequence="CTRL+V"/>
+<keyBinding commandName="Previous Column" keySequence="ARROW_LEFT"/>
+<keyBinding commandName="Previous Editor" keySequence="CTRL+SHIFT+F6"/>
+<keyBinding commandName="Previous Tab" keySequence="CTRL+SHIFT+TAB"/>
+<keyBinding commandName="Previous Word" keySequence="CTRL+ARROW_LEFT"/>
+<keyBinding commandName="Properties" keySequence="ALT+CR"/>
+<keyBinding commandName="Quick Fix" keySequence="CTRL+1"/>
+<keyBinding commandName="Quick Hierarchy" keySequence="CTRL+T"/>
+<keyBinding commandName="Quick Outline" keySequence="ALT+O"/>
+<keyBinding commandName="Quick Switch Editor" keySequence="CTRL+E"/>
+<keyBinding commandName="Reanalyze Sources" keySequence="ALT+CTRL+SHIFT+B"/>
+<keyBinding commandName="Recenter" keySequence="ALT+CTRL+SHIFT+R"/>
+<keyBinding commandName="Redo" keySequence="CTRL+SHIFT+Z"/>
+<keyBinding commandName="References in Workspace" keySequence="CTRL+SHIFT+U"/>
+<keyBinding commandName="Refresh" keySequence="F5"/>
+<keyBinding commandName="Rename - Refactoring " keySequence="ALT+SHIFT+R" platform="win32"/>
+<keyBinding commandName="Restore Last Selection" keySequence="ALT+SHIFT+ARROW_DOWN"/>
+<keyBinding commandName="Resume" keySequence="F8"/>
+<keyBinding commandName="Run" keySequence="CTRL+R"/>
+<keyBinding commandName="Run Script" keySequence="CTRL+SHIFT+F1"/>
+<keyBinding commandName="Run Script" keySequence="CTRL+SHIFT+F2"/>
+<keyBinding commandName="Run Script" keySequence="CTRL+SHIFT+F3"/>
+<keyBinding commandName="Run Script" keySequence="CTRL+SHIFT+F4"/>
+<keyBinding commandName="Run Script" keySequence="CTRL+SHIFT+F5"/>
+<keyBinding commandName="Save" keySequence="CTRL+S"/>
+<keyBinding commandName="Save All" keySequence="CTRL+SHIFT+S"/>
+<keyBinding commandName="Scroll Line Down" keySequence="CTRL+ARROW_DOWN"/>
+<keyBinding commandName="Scroll Line Up" keySequence="CTRL+ARROW_UP"/>
+<keyBinding commandName="Search Box" keySequence="CTRL+3"/>
+<keyBinding commandName="Select All" keySequence="CTRL+A"/>
+<keyBinding commandName="Select Enclosing Element" keySequence="ALT+SHIFT+ARROW_UP"/>
+<keyBinding commandName="Select Line End" keySequence="SHIFT+END"/>
+<keyBinding commandName="Select Line Start" keySequence="SHIFT+HOME"/>
+<keyBinding commandName="Select Next Element" keySequence="ALT+SHIFT+ARROW_RIGHT"/>
+<keyBinding commandName="Select Next Word" keySequence="CTRL+SHIFT+ARROW_RIGHT"/>
+<keyBinding commandName="Select Previous Element" keySequence="ALT+SHIFT+ARROW_LEFT"/>
+<keyBinding commandName="Select Previous Word" keySequence="CTRL+SHIFT+ARROW_LEFT"/>
+<keyBinding commandName="Shift Left" keySequence="ALT+CTRL+SHIFT+ARROW_LEFT"/>
+<keyBinding commandName="Shift Right" keySequence="ALT+CTRL+SHIFT+ARROW_RIGHT"/>
+<keyBinding commandName="Show Key Assist" keySequence="ALT+CTRL+SHIFT+L"/>
+<keyBinding commandName="Show Ruler Context Menu" keySequence="CTRL+F10"/>
+<keyBinding commandName="Show in Finder" keySequence="ALT+CTRL+SHIFT+F"/>
+<keyBinding commandName="Step Into" keySequence="F5"/>
+<keyBinding commandName="Step Over" keySequence="F6"/>
+<keyBinding commandName="Step Return" keySequence="F7"/>
+<keyBinding commandName="Terminate" keySequence="CTRL+F2"/>
+<keyBinding commandName="Text End" keySequence="CTRL+END"/>
+<keyBinding commandName="Text Start" keySequence="CTRL+HOME"/>
+<keyBinding commandName="To Lower Case" keySequence="CTRL+SHIFT+Y"/>
+<keyBinding commandName="To Upper Case" keySequence="CTRL+SHIFT+X"/>
+<keyBinding commandName="Toggle Breakpoint" keySequence="CTRL+SHIFT+B"/>
+<keyBinding commandName="Toggle Comment" keySequence="CTRL+/"/>
+<keyBinding commandName="Toggle Overwrite" keySequence="INSERT"/>
+<keyBinding commandName="Undo" keySequence="CTRL+Z"/>
+</dartKeyBindings>
