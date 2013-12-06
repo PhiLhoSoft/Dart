@@ -1,5 +1,98 @@
 # Dart language for Java programmers
 
+## First contact
+
+### A sample class
+
+    /** An employee is a Person with an enterprise id, a department and a salary. */
+    class Employee extends Person implements HasId
+    {
+        String id;
+        Department department = Department.ACCOUNTING;
+        int salary = Salary.MINIMUM;
+
+        Employee(String name, String id) { this.name = name; this.id = id; }
+
+        @override String getId() { return id; }
+        int getSalary() { return salary; }
+        Department getDepartment() { return department; }
+
+        Employee setSalary(int salary)
+        {
+            if (salary < Salary.MINIMUM)
+                this.salary = Salary.MINIMUM;
+            else
+                this.salary = salary;
+            return this;
+        }
+        Employee setDepartment(Department department) { this.department = department; return this; }
+        Employee changeSalary(int amount) { setSalary(salary + amount); return this; }
+
+        @override String toString() { return name + " " + salary.toString() + " " + department.toString(); }
+    }
+
+Used as:
+
+    Employee employee = new Employee("John J", "H2G2-42");
+    employee.setSalary(1500).setDepartment(Department.DEVELOPMENT);
+    print(employee);
+    employee.setDepartment(Department.ACCOUNTING).changeSalary(1000);
+    print(employee);
+
+
+This looks like a Java class, but it is actually Dart code!
+This similarity can help Java coders to quickly get into Dart code, hence this article.
+But there is more in Dart, we can see a more idiomatic version of this class, less verbose.
+
+### An idiomatic Dart class
+
+    abstract class HasId { String id; } // Interface definition. Automatically defines the accessors
+
+    class Person { final String name; Person.named(this.name); } // Named constructor
+
+    class Salary { static const int MINIMUM = 2000; }
+
+    class Department
+    {
+        final String name;
+
+        static const Department DEVELOPMENT = const Department("development");
+        static const Department ACCOUNTING = const Department("accounting");
+
+        const Department(this.name); // Const constructor allows to build compile-time constant objects
+
+        @override String toString() { return name; }
+    }
+
+    /// An employee is a Person with an enterprise id, a department and a salary.
+    class Employee extends Person implements HasId
+    {
+        String id;
+        Department department;
+        int _salary; // Now hidden behind getters and setters
+
+        // id is automatically assigned, name is transmitted to super-class's constructor
+        Employee(String name, this.id) : super.named(name);
+
+        // Define getters and setters for salary. Still used as e.salary access.
+        int get salary => _salary;
+        set salary(int s) => _salary = s < Salary.MINIMUM ? Salary.MINIMUM : s;
+        // This one calls the setter behind the scene!
+        void changeSalary(int amount) { salary += amount; }
+
+        // String interpolation
+        @override String toString() { return "$name $salary $department"; }
+    }
+
+Used as:
+
+    Employee employeeI = new Employee("John I", "H2G2-42");
+    employeeI ..salary = 1500 ..department = Department.DEVELOPMENT;
+    print(employeeI);
+    employeeI ..department = Department.ACCOUNTING ..changeSalary(1000);
+    print(employeeI);
+
+
 ## Introduction
 
 The Dart language has been created by Google in 2011 to help creating structured Web applications. It aims to address the limitations and frustrations of the JavaScript language. It just reached the version 1.0 at the time of writing, implying a stabilization of syntax and features.
@@ -31,7 +124,8 @@ Line comments and block comments are identical to Java ones. No comments...
 Declaration with default value or explicit initialization, assignment, all familiar...
 The semi-colons are mandatory.
 
-The difference reside in the list of types. We have the classical numerical types, booleans, strings, collections, and classes.
+The difference reside in the list of types. The classical numerical types, booleans, strings, collections, and classes are there.
+Array indexes start at 0. Strings are immutable.
 
 Expressions combine them and result in a value. All the classical arithmetic and boolean (binary & logical) operators are usable, with some additional ones detailed later.
 
@@ -41,26 +135,22 @@ Variables can be declared `final`, making them immutable (constants).
 
     int square(int x) { return x * x; }
 
-Familiar, again, although we will see that functions are first-class citizens in Dart and have rich features and syntax.
+Familiar, again, but there is more in Dart!
 
 ### Conditionals and loops
 
-We have the full stuff: `if` and `else`, `for` loop, `while` and `do ... while`, `switch` and `case`, `break` and `continue` (they can take a label).
+The full stuff is there: `if` and `else`, `for` loop, `while` and `do ... while`, `switch` and `case`, `break` and `continue` (they can take a label).
 
 Dart also manages exceptions with `try / catch / finally`.
 
-### Interfaces and classes
+### Classes and interfaces
 
-Dart have them, with identical syntax: interfaces have function signatures, classes can implement one or more interfaces and can extend one class. Classes can be abstract, too.
+Dart use the same syntax for classes than Java.. They can be abstract. Interfaces are made of function signatures. Classes can implement one or more interfaces and can extend one class. They can use generic types (same base syntax than Java).
 
-Classes and interfaces can use generic types (same base syntax than Java).
-
-Classes have constructors, not inherited, than can be called with super(), with automatic call of the parameterless super constructor.
-
-A constructor can call another with `this()`.
+A constructor can call another with `this()` and can call the parent's constructor with `super()`. Constructors are not inherited. They automatically call the parameterless super constructor.
 Overridden methods can be marked with the `@override` annotation (lowercase!).
 
-We can make class-wide variables and functions with the `static` keyword.
+The `static` keyword can be used to make class-scoped variables and functions.
 
 
 ## The differences and improvements
@@ -95,7 +185,7 @@ Dart has some base, built-in types, all with a literal representation:
 Tripled quotes can delimit multiline strings.<br>
 Strings literals can reference variables in the form of `$x` (x being a variable name) or `${x}` where x is an expression. These references are replaced at runtime with their value (string interpolation).<br>
 Adjacent string literals are concatenated. Strings can be concatenated with the `+` operator too. It is safe to compare strings with `==`.<br>
-We can access characters of a string (actually substrings) by treating them like arrays: `someString[index]`.
+Characters of a string (actually substrings) are accessible by treating them like arrays: `someString[index]`. Read-only: strings are immutable!
 
 **Lists** are extensible arrays, ordered group of objects. They have the same syntax than Java's arrays (0-based, indexing, .length) but literals look like JavaScript:
     var list = [1, 3, 5, 7];
@@ -478,15 +568,69 @@ Example:
     var logger = new Logger('UI');
     logger.log("Something happened!");
 
+#### Methods
+
+Instance methods can access to instance variables and `this`. Same than Java. Like functions, you cannot overload a method (same name, different list of parameters) but you can override an inherited method.
+
+As seen, when we access an instance variable, we do it via implicit accessors. They can be made explicit with `get` and `set` keywords:
+
+    class Product
+    {
+        float price;
+    }
+
+`Product`'s variable is accessed directly: `product.price = 42;`
+
+If, one day, we must check the value when setting it, or transform it before returning it, it can be done without change to the interface:
+
+    class Product
+    {
+        static const num VAT = 0.196;
+        num priceWithoutVAT;
+
+        // Define a new calculated property
+        num get price => priceWithoutVAT * (1 + VAT);
+        set price(num p) => priceWithoutVAT = p / (1 + VAT);
+    }
+
+and it is still accessed like: `product.price = 42;`
+
+and we can use `product.priceWithoutVAT` too.
+So `get` and `set` allows to define a new virtual property (only `get` is needed for a `final` variable).
+
+#### Implicit interfaces
+
+Actually, Dart doesn't have an `interface` keyword. Every class implicitly defines an interface containing all the instance members of the class (methods and variables, or actually their accessors).
+
+    class Animal
+    {
+        String name;
+        Animal(this.name);
+        void speak() { print("$name produces a sound!"); }
+    }
+
+    class Duck implements Animal
+    {
+        String name; // Must be implemented!
+        void speak() { print("$name quacks!"); } // This one too
+        // The constructor isn't part of the interface
+    }
+
+#### Abstract classes
+
+Like in Java, we can use the `abstract` keyword to define an abstract class that cannot be instiantiated.
+In an abstract class, instance methods (including getters and setters) can be abstract too, by putting a semi-colon instead of a method body.
+Abstract classes with all abstract methods are equivalent to Java's interfaces.
+
 #### Overridable operators
 
 The following operators are overridable, ie. you can redefine them in a class, allowing to use the operator on instances of this class.
 
-	<	+	|	[]
-	>	/	^	[]=
-	<=	~/	&	~
-	>=	*	<<	==
-	–	%	>>
+    <	+	|	[]
+    >	/	^	[]=
+    <=	~/	&	~
+    >=	*	<<	==
+    –	%	>>
 
 The corresponding assignment operators are overridden as well.
 
@@ -501,7 +645,6 @@ Example:
 
         Vector operator +(Vector v) // Overrides + (a + b)
         {
-
             return new Vector(x + v.x, y + v.y);
         }
 
@@ -527,3 +670,47 @@ Usage:
     var subv = new Vector(3.14, 2.71);
     subv += v1;
     print("Overridden minus on vector: $subv");
+
+#### Mixins
+
+Mixins are a way to inject behavior into classes without relying on inheritance.
+
+A mixin is a class not extending anything (except Object, of course), without declared constructors and without calls to `super`.
+
+A class can use one or several mixins declared after the `with` keyword. Then the methods and variables defined in the mixin(s) become part of the class, as if imported.
+
+    abstract class HasNames // Mixin
+    {
+        String firstName;
+        String lastName;
+
+        String getFullName() => "$firstName $lastName";
+    }
+
+    abstract class Human { int age; }
+
+    class Person extends Human with HasNames // The class must extend another to use a mixin
+    {
+        Person(int age, String firstName, String lastName)
+        {
+            super.age = age;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        @override String toString() => "${getFullName()} is $age years old.";
+    }
+
+#### Static variables and methods
+
+As in Java, static variables (class variables) are useful for class-wide state and constants. They are not initialized until they are used (lazy initialization).
+
+Static methods (class methods) are actually independent of their class (they have no access to `this`) and thus can be replaced with top-level functions.
+Static methods can be used as compile-time constants.
+
+#### Generics
+
+The syntax is similar that the Java one, but the implementation is quite different: generics are always covariant, and they are reified, ie. their type is kept at runtime.
+
+
+

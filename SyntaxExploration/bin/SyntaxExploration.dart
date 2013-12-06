@@ -38,7 +38,7 @@ void main()
 
 	print(NO_ESCAPE);
 
-	print("---" + MULTI_LINE + "---");
+	print("---$MULTI_LINE---");
 
 	foo(314);
 
@@ -77,12 +77,20 @@ void main()
 	var subv = new Vector(3.14, 2.71);
 	subv += v1;
 	print("Overridden minus on vector: $subv");
+
+	Product product = new Product();
+	product.price = 42;
+	print("Price: ${product.priceWithoutVAT} -> ${product.price} with VAT");
+
+	Person john = new Person(27, "John", "Smith");
+	print(john);
 }
 
 void foo(int x) { print("foo: $x"); }
 // Invalid! No function polymorphism / overloading. Use optional parameters...
 //void foo(int x, int y) { print("foo: $x and $y"); }
 //void foo(String s) { print("foo: $s"); }
+
 void bar({ int x, int y, String s })
 {
 	if (x != null || y != null)
@@ -152,4 +160,52 @@ class Vector
 	{
 		return "($x, $y)";
 	}
+}
+
+class Product
+{
+	static const num VAT = 0.196;
+	num priceWithoutVAT;
+
+	// Define a new calculated property
+	num get price => priceWithoutVAT * (1 + VAT);
+	set price(num p) => priceWithoutVAT = p / (1 + VAT);
+}
+
+class Animal
+{
+	String name;
+	Animal(this.name);
+	void speak() { print("$name produces a sound!"); }
+}
+
+class Duck implements Animal
+{
+	String name;
+	void speak() { print("$name quacks!"); }
+}
+
+abstract class HasNames
+{
+	String firstName;
+	String lastName;
+
+	String getFullName() => "$firstName $lastName";
+}
+
+abstract class Human
+{
+	int age;
+}
+
+class Person extends Human with HasNames
+{
+	Person(int age, String firstName, String lastName)
+	{
+		super.age = age;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	@override String toString() => "${getFullName()} is $age years old.";
 }
