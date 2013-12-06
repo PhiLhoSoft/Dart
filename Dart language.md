@@ -576,7 +576,7 @@ As seen, when we access an instance variable, we do it via implicit accessors. T
 
     class Product
     {
-        float price;
+      float price;
     }
 
 `Product`'s variable is accessed directly: `product.price = 42;`
@@ -585,12 +585,12 @@ If, one day, we must check the value when setting it, or transform it before ret
 
     class Product
     {
-        static const num VAT = 0.196;
-        num priceWithoutVAT;
+      static const num VAT = 0.196;
+      num priceWithoutVAT;
 
-        // Define a new calculated property
-        num get price => priceWithoutVAT * (1 + VAT);
-        set price(num p) => priceWithoutVAT = p / (1 + VAT);
+      // Define a new calculated property
+      num get price => priceWithoutVAT * (1 + VAT);
+      set price(num p) => priceWithoutVAT = p / (1 + VAT);
     }
 
 and it is still accessed like: `product.price = 42;`
@@ -604,16 +604,16 @@ Actually, Dart doesn't have an `interface` keyword. Every class implicitly defin
 
     class Animal
     {
-        String name;
-        Animal(this.name);
-        void speak() { print("$name produces a sound!"); }
+      String name;
+      Animal(this.name);
+      void speak() { print("$name produces a sound!"); }
     }
 
     class Duck implements Animal
     {
-        String name; // Must be implemented!
-        void speak() { print("$name quacks!"); } // This one too
-        // The constructor isn't part of the interface
+      String name; // Must be implemented!
+      void speak() { print("$name quacks!"); } // This one too
+      // The constructor isn't part of the interface
     }
 
 #### Abstract classes
@@ -638,25 +638,25 @@ Example:
 
     class Vector
     {
-        final num x;
-        final num y;
+      final num x;
+      final num y;
 
-        const Vector(this.x, this.y);
+      const Vector(this.x, this.y);
 
-        Vector operator +(Vector v) // Overrides + (a + b)
-        {
-            return new Vector(x + v.x, y + v.y);
-        }
+      Vector operator +(Vector v) // Overrides + (a + b)
+      {
+        return new Vector(x + v.x, y + v.y);
+      }
 
-        Vector operator -(Vector v) // Overrides - (a - b)
-        {
-            return new Vector(x - v.x, y - v.y);
-        }
+      Vector operator -(Vector v) // Overrides - (a - b)
+      {
+        return new Vector(x - v.x, y - v.y);
+      }
 
-        String toString()
-        {
-            return "($x, $y)";
-        }
+      String toString()
+      {
+        return "($x, $y)";
+      }
     }
 
 Usage:
@@ -681,24 +681,24 @@ A class can use one or several mixins declared after the `with` keyword. Then th
 
     abstract class HasNames // Mixin
     {
-        String firstName;
-        String lastName;
+      String firstName;
+      String lastName;
 
-        String getFullName() => "$firstName $lastName";
+      String getFullName() => "$firstName $lastName";
     }
 
     abstract class Human { int age; }
 
     class Person extends Human with HasNames // The class must extend another to use a mixin
     {
-        Person(int age, String firstName, String lastName)
-        {
-            super.age = age;
-            this.firstName = firstName;
-            this.lastName = lastName;
-        }
+      Person(int age, String firstName, String lastName)
+      {
+        super.age = age;
+        this.firstName = firstName;
+        this.lastName = lastName;
+      }
 
-        @override String toString() => "${getFullName()} is $age years old.";
+      @override String toString() => "${getFullName()} is $age years old.";
     }
 
 #### Static variables and methods
@@ -712,5 +712,72 @@ Static methods can be used as compile-time constants.
 
 The syntax is similar that the Java one, but the implementation is quite different: generics are always covariant, and they are reified, ie. their type is kept at runtime.
 
+### Libraries
+
+Dart comes with a number of libraries and you can define your own. Actually, every Dart app is a library.
+Libraries can be distributed using packages.
+
+#### Using libraries
+
+The namespace of a library can be used in the scope of another library (or app), by using the `import` directive.
+
+Examples:
+
+    import 'dart:html'; // Used in many Web apps
+    import 'package:userDefinedLib/utils.dart';
+
+`import` wants a URI specifying the library. All built-in libraries use the special `dart:` scheme. Other libraries can use a file system path or the `package:` scheme. The later specifies libraries provided by a package manager such as the `pub` tool.
+
+To avoid potential conflicts (two libraries using the same identifier), you can specify a prefix on one or both libraries. For example, if you use two libraries defining the very common name `Node`, one can be prefixed:
+
+    import 'package:lib1/lib1.dart';
+    import 'package:lib2/lib2.dart' as other;
+
+    var node1 = new Node(); // Use Node from lib1
+    var node2 = new other.Node(); // Use Node from lib2
+
+You can also import only part of a library:
+
+    import 'package:lib1/lib1.dart' show Node; // Import only Node
+    import 'package:lib2/lib2.dart' hide Node; // Import everything except Node
+
+#### Defining libraries
+
+To make your own library, you declare it with `library` and specify additional files with `part`.
+
+    library htmlSoup; // Declare this .dart file is a library named htmlSoup
+
+    import 'dart:hml'; // This library uses the HTML library
+
+    part 'parser.dart';
+    part 'query.dart';
+
+    // Main code here
+
+In the `parser.dart` and the `query.dart` files:
+
+    part of htmlSoup;
+
+    // Code goes here
+
+You can combine or re-package libraries by re-exporting part or all of them.
+Example:
+
+    library foo;
+    yo() => print('Yo!');
+
+    // In another .dart file:
+    library bar;
+    import 'foo.dart';
+    export 'foo.dart' show yo; // Exposes yo() as it was its own
+
+    // When using the bar libary
+    import 'bar.dart';
+
+    yo(); // We can use the function defined in foo.dart
+
+### Typedef and metadata
+
+TODO
 
 
