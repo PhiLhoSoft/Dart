@@ -576,7 +576,7 @@ As seen, when we access an instance variable, we do it via implicit accessors. T
 
     class Product
     {
-      float price;
+        float price;
     }
 
 `Product`'s variable is accessed directly: `product.price = 42;`
@@ -585,12 +585,12 @@ If, one day, we must check the value when setting it, or transform it before ret
 
     class Product
     {
-      static const num VAT = 0.196;
-      num priceWithoutVAT;
+        static const num VAT = 0.196;
+        num priceWithoutVAT;
 
-      // Define a new calculated property
-      num get price => priceWithoutVAT * (1 + VAT);
-      set price(num p) => priceWithoutVAT = p / (1 + VAT);
+        // Define a new calculated property
+        num get price => priceWithoutVAT * (1 + VAT);
+        set price(num p) => priceWithoutVAT = p / (1 + VAT);
     }
 
 and it is still accessed like: `product.price = 42;`
@@ -604,16 +604,16 @@ Actually, Dart doesn't have an `interface` keyword. Every class implicitly defin
 
     class Animal
     {
-      String name;
-      Animal(this.name);
-      void speak() { print("$name produces a sound!"); }
+        String name;
+        Animal(this.name);
+        void speak() { print("$name produces a sound!"); }
     }
 
     class Duck implements Animal
     {
-      String name; // Must be implemented!
-      void speak() { print("$name quacks!"); } // This one too
-      // The constructor isn't part of the interface
+        String name; // Must be implemented!
+        void speak() { print("$name quacks!"); } // This one too
+        // The constructor isn't part of the interface
     }
 
 #### Abstract classes
@@ -638,25 +638,25 @@ Example:
 
     class Vector
     {
-      final num x;
-      final num y;
+        final num x;
+        final num y;
 
-      const Vector(this.x, this.y);
+        const Vector(this.x, this.y);
 
-      Vector operator +(Vector v) // Overrides + (a + b)
-      {
-        return new Vector(x + v.x, y + v.y);
-      }
+        Vector operator +(Vector v) // Overrides + (a + b)
+        {
+            return new Vector(x + v.x, y + v.y);
+        }
 
-      Vector operator -(Vector v) // Overrides - (a - b)
-      {
-        return new Vector(x - v.x, y - v.y);
-      }
+        Vector operator -(Vector v) // Overrides - (a - b)
+        {
+            return new Vector(x - v.x, y - v.y);
+        }
 
-      String toString()
-      {
-        return "($x, $y)";
-      }
+        String toString()
+        {
+            return "($x, $y)";
+        }
     }
 
 Usage:
@@ -681,24 +681,24 @@ A class can use one or several mixins declared after the `with` keyword. Then th
 
     abstract class HasNames // Mixin
     {
-      String firstName;
-      String lastName;
+        String firstName;
+        String lastName;
 
-      String getFullName() => "$firstName $lastName";
+        String getFullName() => "$firstName $lastName";
     }
 
     abstract class Human { int age; }
 
     class Person extends Human with HasNames // The class must extend another to use a mixin
     {
-      Person(int age, String firstName, String lastName)
-      {
-        super.age = age;
-        this.firstName = firstName;
-        this.lastName = lastName;
-      }
+        Person(int age, String firstName, String lastName)
+        {
+            super.age = age;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
 
-      @override String toString() => "${getFullName()} is $age years old.";
+        @override String toString() => "${getFullName()} is $age years old.";
     }
 
 #### Static variables and methods
