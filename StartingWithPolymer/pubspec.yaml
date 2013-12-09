@@ -1,0 +1,8 @@
+name: StartingWithPolymer
+description: Starting to use Polymer
+dependencies:
+  browser: any
+  polymer: any
+transformers:
+- polymer:
+    entry_points: web/StartingWithPolymer.html

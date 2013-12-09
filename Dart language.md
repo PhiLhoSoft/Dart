@@ -315,6 +315,7 @@ In this form, types can be omitted but style recommends to put them.
 
 For simple functions, a shorthand syntax is available:
     doStuff(number) => print("I do stuff with $number.");
+    present(person) => "My name is ${person.name}";
 Types can be added but style recommends to omit them...
 There can be only one expression (not a statement) after the `=>`
 
@@ -357,9 +358,9 @@ Positional optional parameters are defined between square brackets:
 
 called as:
 
-    build("First"); // => Making First
-    build("First", "Second"); // => Making First with Second
-    build("First", "Second", "Third"); // => Making First with Second and even with Third
+    build("First"); // ==> Making First
+    build("First", "Second"); // ==> Making First with Second
+    build("First", "Second", "Third"); // ==> Making First with Second and even with Third
 
 Positional parameters can have default values too:
 
@@ -376,6 +377,16 @@ All Dart apps have a top-level `main()` function, entry point to the application
 
 Functions are first-class objects, ie. they can be assigned to a variable, passed as function parameter, stored in a collection, etc.
 Functions can be defined inside another function. They can be named (the name is the actually the name of the variable they are stored in) or anonymous.
+
+    void bar({ int x, int y })
+    {
+      toString(v) { return v == null ? '' : v.toString(); }
+
+      if (x != null || y != null)
+      {
+        print("bar: ${toString(x)} and ${toString(y)}");
+      }
+    }
 
     void jaPrint(String word)
     {
@@ -643,20 +654,17 @@ Example:
 
       const Vector(this.x, this.y);
 
-      Vector operator +(Vector v) // Overrides + (a + b)
+      @override Vector operator +(Vector v) // Add two vectors
       {
         return new Vector(x + v.x, y + v.y);
       }
 
-      Vector operator -(Vector v) // Overrides - (a - b)
+      @override Vector operator -(Vector v) // Subtract two vectors
       {
         return new Vector(x - v.x, y - v.y);
       }
 
-      String toString()
-      {
-        return "($x, $y)";
-      }
+      @override String toString() => "($x, $y)";
     }
 
 Usage:

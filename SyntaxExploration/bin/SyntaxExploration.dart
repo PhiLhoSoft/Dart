@@ -103,9 +103,11 @@ void foo(int x) { print("foo: $x"); }
 
 void bar({ int x, int y, String s })
 {
+	toString(v) { return v == null ? '' : v.toString(); }
+
 	if (x != null || y != null)
 	{
-		print("bar: ${x == null ? '' : x} and ${y == null ? '' : y}");
+		print("bar: ${toString(x)} and ${toString(y)}");
 	}
 	if (s != null)
 	{
@@ -155,21 +157,17 @@ class Vector
 
 	const Vector(this.x, this.y);
 
-	Vector operator +(Vector v) // Overrides + (a + b)
+	@override Vector operator +(Vector v) // Add two vectors
 	{
-
 		return new Vector(x + v.x, y + v.y);
 	}
 
-	Vector operator -(Vector v) // Overrides - (a - b)
+	@override Vector operator -(Vector v) // Subtract two vectors
 	{
 		return new Vector(x - v.x, y - v.y);
 	}
 
-	String toString()
-	{
-		return "($x, $y)";
-	}
+	@override String toString() => "($x, $y)";
 }
 
 class Product
@@ -241,4 +239,3 @@ class Person extends Object with HumanNameBrick, AddressBrick  // The class to e
 
   @override String toString() => "My name is $lastName, $fullName.";
 }
-

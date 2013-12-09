@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Starting with Polymer</title>
+		<link rel="stylesheet" href="StartingWithPolymer.css">
+
+		<!-- import the click-counter -->
+		<link rel="import" href="ClickCounter.html">
+		<script type="application/dart">export 'package:polymer/init.dart';</script>
+		<script src="packages/browser/dart.js"></script>
+	</head>
+	<body>
+		<h1>Starting with Polymer</h1>
+
+		<p>I know how to count!</p>
+
+		<div id="sample_container_id">
+			<click-counter count="5"></click-counter>
+		</div>
+
+	</body>
+</html>

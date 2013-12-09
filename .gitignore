@@ -1,5 +1,6 @@
 packages
 pubspec.lock
+.buildlog
 .project
 .children
 out
