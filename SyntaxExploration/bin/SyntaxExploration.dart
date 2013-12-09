@@ -82,8 +82,18 @@ void main()
 	product.price = 42;
 	print("Price: ${product.priceWithoutVAT} -> ${product.price} with VAT");
 
-	Person john = new Person(27, "John", "Smith");
-	print(john);
+	// Mixins
+
+	Person p1 = new Person("Robert", "Patterson") ..middleName = "Hugh";
+	p1..addressLine1 = "Hollywood Drive" ..postalCode = "4651" ..city = "Los Angeles" ..country = "USA";
+	Person p2 = new Person("James", "Bond");
+
+	print(p1); print(p1.formattedAddress);
+	print(p2);
+
+	Company c = new Company("42-31415", "Roundabout Ltd");
+	c..addressLine1 = "Muholland Drive" ..postalCode = "4670" ..city = "Hollywood" ..country = "USA";
+	print(c); print(c.formattedAddress);
 }
 
 void foo(int x) { print("foo: $x"); }
@@ -185,27 +195,50 @@ class Duck implements Animal
 	void speak() { print("$name quacks!"); }
 }
 
-abstract class HasNames
-{
-	String firstName;
-	String lastName;
+//== Mixin experimentation ==//
 
-	String getFullName() => "$firstName $lastName";
+abstract class NameBrick // Mixin. abstract is not mandatory but makes sense...
+{
+	String name;
 }
 
-abstract class Human
+abstract class HumanNameBrick // Mixin
 {
-	int age;
+	String firstName, middleName, lastName;
+
+	String get fullName => "$firstName ${middleName == null ? '' : '$middleName '}$lastName";
 }
 
-class Person extends Human with HasNames
+abstract class AddressBrick // Mixin
 {
-	Person(int age, String firstName, String lastName)
+	String addressLine1, addressLine2;
+	String postalCode, city, country;
+
+	String get formattedAddress => """
+$addressLine1${addressLine2 == null ? '' : '\n$addressLine2'}
+$postalCode $city - $country""";
+}
+
+abstract class CompanyEntity { String officialId; CompanyEntity(this.officialId); }
+
+class Company extends CompanyEntity with NameBrick, AddressBrick  // The class must extend another to use a mixin
+{
+	Company(String officialId, String name) : super(officialId)
 	{
-		super.age = age;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 	}
 
-	@override String toString() => "${getFullName()} is $age years old.";
+	@override String toString() => "Company $name (id: $officialId)";
 }
+
+class Person extends Object with HumanNameBrick, AddressBrick  // The class to extend can be Object!
+{
+	Person(String firstName, String lastName)
+  {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  @override String toString() => "My name is $lastName, $fullName.";
+}
+

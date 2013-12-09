@@ -679,27 +679,63 @@ A mixin is a class not extending anything (except Object, of course), without de
 
 A class can use one or several mixins declared after the `with` keyword. Then the methods and variables defined in the mixin(s) become part of the class, as if imported.
 
-    abstract class HasNames // Mixin
-    {
-      String firstName;
-      String lastName;
+    abstract class NameBrick { String name; } // Mixin. abstract is not mandatory but makes sense...
 
-      String getFullName() => "$firstName $lastName";
+    abstract class HumanNameBrick // Mixin
+    {
+      String firstName, middleName, lastName;
+
+      String get fullName => "$firstName ${middleName == null ? '' : '$middleName '}$lastName";
     }
 
-    abstract class Human { int age; }
-
-    class Person extends Human with HasNames // The class must extend another to use a mixin
+    abstract class AddressBrick // Mixin
     {
-      Person(int age, String firstName, String lastName)
+      String addressLine1, addressLine2;
+      String postalCode, city, country;
+
+      String get formattedAddress => """
+    $addressLine1${addressLine2 == null ? '' : '\n$addressLine2'}
+    $postalCode $city - $country""";
+    }
+
+    abstract class CompanyEntity { String officialId; CompanyEntity(this.officialId); } // Base brick...
+
+    class Company extends CompanyEntity with NameBrick, AddressBrick  // The class must extend another to use a mixin
+    {
+      Company(String officialId, String name) : super(officialId)
       {
-        super.age = age;
+        this.name = name;
+      }
+
+      @override String toString() => "Company $name (id: $officialId)";
+    }
+
+    class Person extends Object with HumanNameBrick, AddressBrick  // The class to extend can be Object!
+    {
+      Person(String firstName, String lastName)
+      {
         this.firstName = firstName;
         this.lastName = lastName;
       }
 
-      @override String toString() => "${getFullName()} is $age years old.";
+      @override String toString() => "My name is $lastName, $fullName.";
     }
+
+Usage:
+
+    Person p1 = new Person(25, "Demi", "Lees");
+    p1..addressLine1 = "Hollywood Drive" ..postalCode = "4651" ..city = "Los Angeles" ..country = "USA";
+    Person p2 = new Person(52, "Robert", "Patterson") ..middleName = "Hugh";
+
+    print(p1); print(p1.formattedAddress);
+    print(p2);
+
+    Company c = new Company("42-31415", "Roundabout Ltd");
+    c..addressLine1 = "Muholland Drive" ..postalCode = "4670" ..city = "Hollywood" ..country = "USA";
+    print(c); print(c.formattedAddress);
+
+As you can see, the address is now fully part of both classes.
+It favors composition over inheritance: a class can use several mixins, in a "has a" relation instead of "is a", but with a tighter integration than referencing a class: we can use `p1.formattedAddress` directly instead of `p1.address.formattedAddress`, for example.
 
 #### Static variables and methods
 
