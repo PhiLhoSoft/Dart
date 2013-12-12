@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Dart language for Java programmers</title>
+
+		<meta name="description" content="A presentation of the Dart language aimed at Java programmers">
+		<meta name="author" content="Philippe Lhoste">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Dart language<br/>for Java programmers</h2>
+				</section>
+
+				<section>
+
+					<section>
+						<h2>First Contact</h2>
+					</section>
+
+<section data-markdown><script type="text/template">
+### A sample class
+
+    /** An employee is a Person with an enterprise id, a department and a salary. */
+    class Employee extends Person implements HasId
+    {
+        String id;
+        Department department = Department.ACCOUNTING;
+        int salary = Salary.MINIMUM;
+
+        Employee(String name, String id) { this.name = name; this.id = id; }
+
+        @override String getId() { return id; }
+        int getSalary() { return salary; }
+        Department getDepartment() { return department; }
+
+        Employee setSalary(int salary)
+        {
+            if (salary < Salary.MINIMUM)
+                this.salary = Salary.MINIMUM;
+            else
+                this.salary = salary;
+            return this;
+        }
+        Employee setDepartment(Department department) { this.department = department; return this; }
+        Employee changeSalary(int amount) { setSalary(salary + amount); return this; }
+
+        @override String toString() { return name + " " + salary.toString() + " " + department.toString(); }
+    }
+</script></section>
+
+<section data-markdown><script type="text/template">
+##### Used as:
+
+    Employee employee = new Employee("John J", "H2G2-42");
+    employee.setSalary(1500).setDepartment(Department.DEVELOPMENT);
+    print(employee);
+    employee.setDepartment(Department.ACCOUNTING).changeSalary(1000);
+    print(employee);
+
+This looks like a Java class, but it is actually Dart code!
+
+But there is more in Dart, we can see a more idiomatic version of this class, less verbose.
+</script></section>
+
+<section data-markdown><script type="text/template">
+### An idiomatic Dart class
+
+    /// An employee is a Person with an enterprise id, a department and a salary.
+    class Employee extends Person implements HasId
+    {
+        String id;
+        Department department;
+        int _salary; // Now hidden behind getters and setters
+
+        // id is automatically assigned, name is transmitted to super-class's constructor
+        Employee(String name, this.id) : super.named(name);
+
+        // Define getters and setters for salary. Still used as e.salary access.
+        int get salary => _salary;
+        set salary(int s) => _salary = s < Salary.MINIMUM ? Salary.MINIMUM : s;
+        // This one calls the setter behind the scene!
+        void changeSalary(int amount) { salary += amount; }
+
+        // String interpolation
+        @override String toString() => "$name $salary $department";
+    }
+</script></section>
+
+<section data-markdown><script type="text/template">
+#### Classes around it
+
+    abstract class HasId { String id; } // Interface definition. Automatically defines the accessors
+
+    class Person { final String name; Person.named(this.name); } // Named constructor
+
+    class Salary { static const int MINIMUM = 2000; }
+
+    class Department
+    {
+        final String name;
+
+        static const Department DEVELOPMENT = const Department("development");
+        static const Department ACCOUNTING = const Department("accounting");
+
+        const Department(this.name); // Const constructor allows to build compile-time constant objects
+
+        @override String toString() => name;
+    }
+</script></section>
+
+<section data-markdown><script type="text/template">
+##### Used as:
+
+    Employee employeeI = new Employee("John I", "H2G2-42");
+    employeeI ..salary = 1500 ..department = Department.DEVELOPMENT;
+    print(employeeI);
+    employeeI ..department = Department.ACCOUNTING ..changeSalary(1000);
+    print(employeeI);
+</script></section>
+
+				</section>
+
+				<section>
+
+<section data-markdown><script type="text/template">
+## Introduction
+
+The Dart language has been created by Google in 2011 to help creating structured Web applications.
+
+It aims to address the limitations and frustrations of the JavaScript language. Its design is strongly inspired by Java with syntax goodies added in.
+
+It just reached the version 1.0 (November 2013), implying a stabilization of syntax and features.
+</script></section>
+
+<section data-markdown><script type="text/template">
+#### Typing
+Dart can be strongly typed, allowing good tool support. It can be run on a specific VM or it can be compiled (or, rather, transcripted) to JavaScript, allowing to run it in any Web browser.
+
+On the VM, it is in checked mode, strongly typed.
+Translated to JS, it is in production mode, as weakly typed as this language.
+
+The former allows debugging and checks, like asserts; the later is faster and runs on all browsers
+</script></section>
+
+<section data-markdown><script type="text/template">
+#### Why these slides?
+The [DartLang.org](https://www.dartlang.org/) site offers a nice, detailed tour of the language. Some examples here come from there...
+
+Since Dart took lot of features from Java, I did a shorter tour, skimming over identical features in both languages. I concentrate on the differences and improvements offered by Dart.
+</script></section>
+
+<section data-markdown><script type="text/template">
+#### Is GWT condemned?
+Dart is:
+
+- Created by Google;
+- Strongly typed and object-oriented;
+- Looking like Java;
+- Converted to JavaScript;
+- To create advanced Web applications.
+</script></section>
+
+<section data-markdown><script type="text/template">
+The language and goals are close of those of GWT,
+so GWT developers wondered if the latter will be abandoned in favor of Dart.
+
+Google told that GWT was used inside the company's projects, and unlikely to disappear.
+
+GWT mostly aims at Java programmers not wanting to learn a new language, so Dart covers a different ground.
+</script></section>
+
+				</section>
+
+<section data-markdown><script type="text/template">
+Foo
+</script></section>
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code data-trim contenteditable>
+function linkify( selector ) {
+  if( supports3DTransforms ) {
+
+    var nodes = document.querySelectorAll( selector );
+
+    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+      var node = nodes[i];
+
+      if( !node.className ) {
+        node.className += ' roll';
+      }
+    }
+  }
+}
+					</code></pre>
+					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
+
+				<section>
+					<h1>That's All Folk!</h1>
+					<h3>by Philippe Lhoste</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

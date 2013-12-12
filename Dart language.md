@@ -61,7 +61,7 @@ But there is more in Dart, we can see a more idiomatic version of this class, le
 
         const Department(this.name); // Const constructor allows to build compile-time constant objects
 
-        @override String toString() { return name; }
+        @override String toString() => name;
     }
 
     /// An employee is a Person with an enterprise id, a department and a salary.
@@ -81,7 +81,7 @@ But there is more in Dart, we can see a more idiomatic version of this class, le
         void changeSalary(int amount) { salary += amount; }
 
         // String interpolation
-        @override String toString() { return "$name $salary $department"; }
+        @override String toString() => "$name $salary $department";
     }
 
 Used as:
@@ -744,6 +744,7 @@ Usage:
 
 As you can see, the address is now fully part of both classes.
 It favors composition over inheritance: a class can use several mixins, in a "has a" relation instead of "is a", but with a tighter integration than referencing a class: we can use `p1.formattedAddress` directly instead of `p1.address.formattedAddress`, for example.
+This addresses the main issue of composition in Java where we have to write lot of boilerplate code to expose the methods of the inner classes as methods of the wrapper class.
 
 #### Static variables and methods
 
@@ -820,8 +821,65 @@ Example:
 
     yo(); // We can use the function defined in foo.dart
 
-### Typedef and metadata
+### Typedef
 
-TODO
+Functions are objects, of type `Function`. If you want more typing, indicating what are the parameter types and the return type, you need to use a typedef:
 
+    typedef int Comparator(Object a, Object b);
+
+Thus, we can specify exactly the kind of function expected in a variable or parameter:
+
+    class SortedStuff
+    {
+      Comparator comparator;
+
+      SortedStuff(this.comparator);
+    }
+
+    int compare(Object a, Object b) => doTheComparison();
+
+    main()
+    {
+      SortedStuff stuff = new SortedStuff(compare);
+      assert(stuff.comparator is Function); // Still true
+      assert(stuff.comparator is Comparator); // More precise
+    }
+
+### Metadata
+
+Dart supports metadata, equivalent to Java's annotations, allowing to add information to code.
+Notation is `@metadata` where `metadata` is a constant or a class to a constant constructor.
+
+Dart has three built-in metadata: @deprecated, @override and @proxy.
+
+You can create your own metadata annoations. For example:
+
+    library todo;
+
+    class todo
+    {
+      final String owner;
+      final String task;
+
+      const todo(this.owner, this.task);
+    }
+
+Used as:
+
+    import 'todo.dart'
+
+    @todo('somebody', 'This should work!')
+    void muddleAround()
+    {
+      trySomething();
+    }
+
+Metadata can appear before a library, class, typedef, type parameter, constructor, factory, function, field, parameter, or variable declaration and before an import or export directive.
+Currently, there isn't much that can be done with this metadata, but the Dart team plan to add introspection to exploit this information.
+
+## Conclusion
+
+The creators of the language admit themselves it is a plain old, a bit boring, language: it doesn't have new, exciting features like multiple return values (Lua), syntax sugar to make DSLs (Scala) and similar.
+Yet, it builds on a time-prouved syntax, familiar to lot of developers, with some goodies to avoid verbosity, nice features like mixins and functions as first-class objects, and so on.
+It allows to code for the browser in a safer, more robust way.
 
