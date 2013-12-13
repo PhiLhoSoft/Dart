@@ -1,0 +1,8 @@
+name: ScorecardEditor
+description: Editor of scorecards, associating icons to ranges
+dependencies:
+   browser: any
+   polymer: any
+transformers:
+- polymer:
+    entry_points: web/ScorecardEditor.html

@@ -1,0 +1,21 @@
+<polymer-element name="icon-chooser">
+	<template>
+		<style>
+			div
+			{
+				font-size: 24pt;
+				text-align: center;
+			}
+			li
+			{
+				list-style-type: none;
+			}
+		</style>
+		<ul on-change="{{handleSelection}}">
+			<template repeat="{{icon in icons}}">
+				<li><i class="fa fa-{{icon}}"></i></li>
+			</template>
+		</ul>
+	</template>
+	<script type="application/dart" src="IconChooser.dart"></script>
+</polymer-element>

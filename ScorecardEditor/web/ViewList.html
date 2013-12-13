@@ -1,0 +1,21 @@
+<polymer-element name="view-list">
+	<template>
+		<style>
+			div
+			{
+				font-size: 24pt;
+				text-align: center;
+			}
+			li
+			{
+				list-style-type: none;
+			}
+		</style>
+		<ul>
+			<template repeat="{{view in views}}">
+				<li>{{view}}</li>
+			</template>
+		</ul>
+	</template>
+	<script type="application/dart" src="ViewList.dart"></script>
+</polymer-element>

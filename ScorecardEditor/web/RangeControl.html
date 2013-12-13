@@ -1,0 +1,22 @@
+<link rel="import" href="RangeSelector.html">
+<link rel="import" href="IconChooser.html">
+
+<polymer-element name="range-control">
+	<template>
+		<style>
+			div
+			{
+			}
+		</style>
+		<div>
+			<button>Add icon</button>
+			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" value=""/>
+			<div>
+				<template repeat="{{selector in selectors | enumerate}}">
+					<range-selector index="{{selector.index}}" selection="{{selector.selected}}"></range-selector>
+				</template>
+			</div>
+		</div>
+	</template>
+	<script type="application/dart" src="RangeControl.dart"></script>
+</polymer-element>

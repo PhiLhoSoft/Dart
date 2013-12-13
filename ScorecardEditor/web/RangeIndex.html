@@ -1,0 +1,26 @@
+<polymer-element name="range-index" attributes="index, selected">
+	<template>
+		<style>
+			div
+			{
+				text-align: center;
+			}
+			button
+			{
+				font-size: 16pt;
+			}
+			unselected
+			{
+				background-color: yellow;
+			}
+			selected
+			{
+				background-color: white;
+			}
+		</style>
+		<div>
+			<button class="{{selectionClass}}" on-click="{{selectToggle}}">{{index}}</button><br>
+		</div>
+	</template>
+	<script type="application/dart" src="RangeIndex.dart"></script>
+</polymer-element>

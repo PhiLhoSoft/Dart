@@ -1,0 +1,20 @@
+<link rel="import" href="RangeIndex.html">
+
+<polymer-element name="range-selector" attributes="index, selection">
+	<template>
+		<style>
+			div
+			{
+				text-align: center;
+			}
+		</style>
+		<div on-change="{{handleSelection}}">
+			<range-index index={{index}}></range-index>
+			<template repeat="{{icon in icons | enumerate}}">
+				<input type="radio" name="range-{{index}}" value="{{icon.index}}"/>
+				<!-- Conditionally add checked attribute to the above? -->
+			</template>
+		</div>
+	</template>
+	<script type="application/dart" src="RangeSelector.dart"></script>
+</polymer-element>
