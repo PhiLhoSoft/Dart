@@ -1,17 +1,24 @@
 <link rel="import" href="RangeSelector.html">
 <link rel="import" href="IconChooser.html">
+<link rel="import" href="IconList.html">
 
 <polymer-element name="range-control">
 	<template>
 		<style>
+			h2
+			{
+				margin: 10px;
+			}
 			div
 			{
 			}
 		</style>
 		<div>
+			<h2>Edit scorecard</h2>
 			<button>Add icon</button>
-			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" value=""/>
+			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" width="2" value=""/>
 			<div>
+				<icon-list></icon-list>
 				<template repeat="{{selector in selectors | enumerate}}">
 					<range-selector index="{{selector.index}}" selection="{{selector.selected}}"></range-selector>
 				</template>

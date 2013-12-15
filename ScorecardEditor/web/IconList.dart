@@ -6,7 +6,7 @@ import 'package:polymer/polymer.dart';
 @CustomTag('icon-list')
 class IconList extends PolymerElement
 {
-	final List icons = toObservable(['up-arrow', 'square', 'down-arrow']);
+	final List icons = toObservable(['sort-up', 'square', 'sort-down']);
 
 	IconList.created() : super.created() {}
 }

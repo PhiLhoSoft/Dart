@@ -3,7 +3,7 @@ import 'package:polymer/polymer.dart';
 /**
  * Scorecard range control.
  */
-@CustomTag('range-selector')
+@CustomTag('range-control')
 class RangeControl extends PolymerElement
 {
 	final List rangeSelector = [];

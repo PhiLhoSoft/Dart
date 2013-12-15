@@ -9,18 +9,21 @@
 
 		<link rel="import" href="ViewList.html">
 		<link rel="import" href="RangeControl.html">
-		<link rel="import" href="IconList.html">
 		<script type="application/dart">export 'package:polymer/init.dart';</script>
 		<script src="packages/browser/dart.js"></script>
 	</head>
 	<body>
-		<h1>Scorecard Editor</h1>
-
-		<p>Start editing your scorecards!</p>
-
+	
 		<div id="scorecard-editor">
-			<div><view-list></view-list></div>
-			<div><range-control></range-control></div>
+		
+			<div id="header">
+				<h1>Scorecard Editor</h1>
+				<p>Start editing your scorecards!</p>
+			</div>
+			<div id="view-list"><view-list></view-list></div>
+			<div id="scorecard-view"><h2>Current scorecard</h2></div>
+			<div id="range-control"><range-control></range-control></div>
+			
 		</div>
 
 	</body>

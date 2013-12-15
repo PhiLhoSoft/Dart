@@ -1,6 +1,10 @@
 <polymer-element name="view-list">
 	<template>
 		<style>
+			h2
+			{
+				margin: 10px;
+			}
 			div
 			{
 				font-size: 24pt;
@@ -11,6 +15,7 @@
 				list-style-type: none;
 			}
 		</style>
+		<h2>List of views</h2>
 		<ul>
 			<template repeat="{{view in views}}">
 				<li>{{view}}</li>
