@@ -7,7 +7,7 @@ import 'dart:html';
 @CustomTag('range-selector')
 class RangeSelector extends PolymerElement
 {
-	final List icons = toObservable(['up-arrow', 'square', 'down-arrow']);
+	final List icons = toObservable(['sort-up', 'square', 'sort-down']);
 	@published int index = 0;
 	@published int selection;
 

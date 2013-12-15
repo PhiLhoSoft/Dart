@@ -1,4 +1,5 @@
 import 'package:polymer/polymer.dart';
+//import 'RangeSelector.dart';
 
 /**
  * Scorecard range control.
@@ -6,8 +7,8 @@ import 'package:polymer/polymer.dart';
 @CustomTag('range-control')
 class RangeControl extends PolymerElement
 {
-	final List rangeSelector = [];
-	@observable int rangeNb = 0;
+	final List selectors = toObservable([1, 2]);
+	@observable int rangeNb = 2;
 
 	RangeControl.created() : super.created() {}
 }

@@ -9,18 +9,19 @@
 			{
 				margin: 10px;
 			}
-			div
+			.range-list
 			{
+				display: table-row;
 			}
 		</style>
 		<div>
 			<h2>Edit scorecard</h2>
 			<button>Add icon</button>
-			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" width="2" value=""/>
-			<div>
+			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" size="2" value=""/>
+			<div class="range-list">
 				<icon-list></icon-list>
 				<template repeat="{{selector in selectors | enumerate}}">
-					<range-selector index="{{selector.index}}" selection="{{selector.selected}}"></range-selector>
+					<range-selector index="{{selector.index}}" selection="false"></range-selector>
 				</template>
 			</div>
 		</div>

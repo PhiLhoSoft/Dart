@@ -5,15 +5,26 @@
 		<style>
 			div
 			{
+				display: table-cell;
+			}
+			ul
+			{
 				text-align: center;
+				padding-left: 0;
+			}
+			li
+			{
+				list-style-type: none;
 			}
 		</style>
 		<div on-change="{{handleSelection}}">
 			<range-index index={{index}}></range-index>
-			<template repeat="{{icon in icons | enumerate}}">
-				<input type="radio" name="range-{{index}}" value="{{icon.index}}"/>
-				<!-- Conditionally add checked attribute to the above? -->
-			</template>
+			<ul>
+				<template repeat="{{icon in icons | enumerate}}">
+					<li><input type="radio" name="range-{{index}}" value="{{icon.index}}"/></li>
+					<!-- Conditionally add checked attribute to the above? -->
+				</template>
+			</ul>
 		</div>
 	</template>
 	<script type="application/dart" src="RangeSelector.dart"></script>
