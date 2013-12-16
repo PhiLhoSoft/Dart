@@ -58,7 +58,7 @@ h1, p
 	background-color: #DEF;
 }
 
-#range-control
+#kpi-editor
 {
 	position: absolute;
 	left: 200px; /* view-list's width */

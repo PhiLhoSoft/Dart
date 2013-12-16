@@ -2,7 +2,7 @@
 <link rel="import" href="IconChooser.html">
 <link rel="import" href="IconList.html">
 
-<polymer-element name="range-control">
+<polymer-element name="kpi-editor">
 	<template>
 		<style>
 			h2
@@ -15,7 +15,8 @@
 			}
 		</style>
 		<div>
-			<h2>Edit scorecard</h2>
+			<h2>Edit KPI</h2>
+			<label for="KPIName">KPI Name:</label><input type="text" name="KPIName" size="30" value=""/><br/>
 			<button>Add icon</button>
 			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" size="2" value=""/>
 			<div class="range-list">
@@ -26,5 +27,5 @@
 			</div>
 		</div>
 	</template>
-	<script type="application/dart" src="RangeControl.dart"></script>
+	<script type="application/dart" src="KPIEditor.dart"></script>
 </polymer-element>
