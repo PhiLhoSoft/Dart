@@ -173,7 +173,7 @@ Dart doesn't have visibility keywords (private, protected) but a top-level varia
 
 ### Types
 
-All types in Dart are classes, extending the Object super-class. This means that their default value is always `null`.
+All types in Dart are classes, extending the `Object` super-class. This means that their default value is always `null`.
 
 Dart has some base, built-in types, all with a literal representation:
 
@@ -190,7 +190,7 @@ Characters of a string (actually substrings) are accessible by treating them lik
 **Lists** are extensible arrays, ordered group of objects. They have the same syntax than Java's arrays (0-based, indexing, .length) but literals look like JavaScript:
     var list = [1, 3, 5, 7];
 
-**Maps** associate keys and values. Literals and access are JavaScript style:
+**Maps** associate keys and values. Literals and access are in JavaScript style:
     var stuff = { 'a': "one", 'b': "two" };
     stuff['c'] = "three";
     assert(stuff['d'] == null);
@@ -311,7 +311,7 @@ These are important in Dart, and have many syntax goodies.
 
 Base syntax looks like:
     void doStuff(int number) { print("I do stuff with $number."); }
-In this form, types can be omitted but style recommends to put them.
+In this form, types can be omitted but style guide recommends to put them.
 
 For simple functions, a shorthand syntax is available:
     doStuff(number) => print("I do stuff with $number.");
@@ -320,6 +320,8 @@ Types can be added but style recommends to omit them...
 There can be only one expression (not a statement) after the `=>`
 
 Dart doesn't have functions with variable number of arguments, but it is easy to replace with a list literal.
+
+Dart functions cannot be overloaded (same name, different parameters) but its optional parameters features (see below) compensates for this.
 
 All functions return a value. If no return value is specified, it returns a `null`.
 
@@ -462,7 +464,7 @@ The classical form of constructors is supported:
 
 As in  Java, style guide recommends to use `this` only to disambiguate variable names.
 
-Since this pattern is very common, Dart made a shortcut for this:
+Since this pattern is very common, Dart made a shortcut for it:
 
     class Point
     {
@@ -581,7 +583,7 @@ Example:
 
 #### Methods
 
-Instance methods can access to instance variables and `this`. Same than Java. Like functions, you cannot overload a method (same name, different list of parameters) but you can override an inherited method.
+As in Java, instance methods can access to instance variables and `this`. Like functions, you cannot overload a method (same name, different list of parameters) but you can override an inherited method.
 
 As seen, when we access an instance variable, we do it via implicit accessors. They can be made explicit with `get` and `set` keywords:
 

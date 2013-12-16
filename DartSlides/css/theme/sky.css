@@ -60,6 +60,15 @@ body {
 .reveal h5 {
   font-size: 0.9em; }
 
+.reveal p {
+  text-align: left; }
+
+.reveal code {
+  background-color: #B0F8FF; }
+
+.reveal pre code {
+  background-color: inherit; }
+
 /*********************************************
  * LINKS
  *********************************************/

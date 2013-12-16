@@ -16,9 +16,11 @@
 		</style>
 		<div>
 			<h2>Edit KPI</h2>
-			<label for="KPIName">KPI Name:</label><input type="text" name="KPIName" size="30" value=""/><br/>
-			<button>Add icon</button>
-			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" size="2" value=""/>
+			<label for="KPIName">KPI Name: </label><input type="text" name="KPIName" size="30" value="{{kpiName}}"/>
+			<label for="KPIName">Display values: </label><input type="checkbox" name="DisplayValues" checked="{{displayValues}}"/>
+			<br/>
+			<button on-click="{{addIcon}}">Add icon</button>
+			<label for="RangeNumber">Range Nb:</label><input type="text" name="RangeNumber" size="2" value="{{rangeNb}}" on-change="{{onIconNumberChange}}"/>
 			<div class="range-list">
 				<icon-list></icon-list>
 				<template repeat="{{selector in selectors | enumerate}}">
