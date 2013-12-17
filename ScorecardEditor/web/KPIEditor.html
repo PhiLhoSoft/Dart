@@ -27,8 +27,10 @@
 			<label for="RangeNumber">Range Nb:</label><input type="number" name="RangeNumber" min="1" size="2" value="{{typedRangeNb}}" on-change="{{onIconNumberChange}}"/>
 			<div class="range-list">
 				<icon-list></icon-list>
+<!--				<template repeat="{{selector in selectors | enumerate}}">
+					<range-selector rangeIndex="{{selector.index}}" selection="false"></range-selector>-->
 				<template repeat="{{selector in selectors | enumerate}}">
-					<range-selector index="{{selector.index}}" selection="false"></range-selector>
+					<range-selector rangeIndex="{{selector.index}}" selection="false"></range-selector>
 				</template>
 			</div>
 		</div>

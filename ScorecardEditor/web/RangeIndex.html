@@ -1,4 +1,4 @@
-<polymer-element name="range-index" attributes="index, selected">
+<polymer-element name="range-index" attributes="rangeIndex, selected">
 	<template>
 		<style>
 			div
@@ -19,8 +19,9 @@
 				background-color: white;
 			}
 		</style>
+<!--		<div on-range-icon-select="{{onRangeIconSelect}}">-->
 		<div>
-			<button class="{{selectionClass}}" on-click="{{selectToggle}}">{{index}}</button><br>
+			<button class="{{selectionClass}}" on-click="{{selectReset}}">{{rangeIndex}}</button>
 		</div>
 	</template>
 	<script type="application/dart" src="RangeIndex.dart"></script>

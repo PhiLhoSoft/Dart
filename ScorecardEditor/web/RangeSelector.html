@@ -1,6 +1,6 @@
 <link rel="import" href="RangeIndex.html">
 
-<polymer-element name="range-selector" attributes="index, selection">
+<polymer-element name="range-selector" attributes="rangeIndex, selection">
 	<template>
 		<style>
 			div
@@ -17,12 +17,12 @@
 				line-height: 24px;
 			}
 		</style>
-		<div on-change="{{handleSelection}}">
-			<range-index index={{index}}></range-index>
+<!--		<div on-change="{{handleSelection}}" on-reset-range="{{handleReset}}">-->
+		<div>
+			<range-index index={{rangeIndex}}></range-index>
 			<ul>
 				<template repeat="{{icon in icons | enumerate}}">
-					<li><input type="radio" name="range-{{index}}" value="{{icon.index}}"/></li>
-					<!-- Conditionally add checked attribute to the above? -->
+					<li><input type="radio" name="range-{{rangeIndex}}" value="{{icon.index}}" checked="{{selection == icon.index}}"/></li>
 				</template>
 			</ul>
 		</div>

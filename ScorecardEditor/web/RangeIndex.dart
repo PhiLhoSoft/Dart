@@ -1,4 +1,5 @@
 import 'package:polymer/polymer.dart';
+import 'dart:html';
 
 /**
  * Scorecard range index display / clear button.
@@ -6,16 +7,28 @@ import 'package:polymer/polymer.dart';
 @CustomTag('range-index')
 class RangeIndex extends PolymerElement
 {
-	@published int index = 0;
+	@published int rangeIndex = 0;
+	@published bool selected = false;
 	@observable String selectionClass = 'unselected';
-	bool selected = false;
 
 	RangeIndex.created() : super.created() {}
 
-	void selectToggle()
+	void selectReset()
 	{
-		selected = !selected;
-		selectionClass = selected ? 'unselected' : 'selected';
+		selected = false;
+		selectionClass = 'unselected';
+		print('selectReset -> reset-range $rangeIndex');
+		dispatchEvent(new CustomEvent('reset-range', detail: rangeIndex));
+	}
+
+	void onRangeIconSelect(Event e, var detail, Node target)
+	{
+		print("onRangeIconSelect: $detail");
+		if ((detail as int) == rangeIndex)
+		{
+			selected = true;
+			selectionClass = 'selected';
+		}
 	}
 }
 
