@@ -9,10 +9,10 @@ import 'dart:html';
 class KPIEditor extends PolymerElement
 {
 	@observable String kpiName = "";
-	@observable String typedRangeNb;
+	@observable String typedRangeNb = "2";
 	@observable bool displayValues = false;
-	final List selectors = toObservable([1, 2]);
-	int rangeNb = 2;
+	List selectors = toObservable([1, 2]);
+	int rangeNb;
 
 	KPIEditor.created() : super.created() {}
 
@@ -23,7 +23,13 @@ class KPIEditor extends PolymerElement
 
 	void onIconNumberChange(Event e, var detail, Node target)
 	{
-		print((e.target as InputElement).value);
+		rangeNb = int.parse((e.target as InputElement).value);
+		selectors.clear();
+		for (int i = 0; i < rangeNb; i++)
+		{
+			selectors.add(i);
+		}
+		print(selectors);
 	}
 }
 
