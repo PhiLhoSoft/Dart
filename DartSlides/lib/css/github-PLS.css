@@ -1,6 +1,7 @@
 /*
 
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+Based on github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+Changes by PhiLho (c) Philippe Lhoste <PhiLho(a)GMX.net>
 
 */
 
@@ -12,9 +13,18 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs-comment,
 .hljs-template_comment,
-.diff .hljs-header,
-.hljs-javadoc {
+.diff .hljs-header {
   color: #998;
+  font-family: 'Open Sans', sans-serif;
+}
+.hljs-javadoc,
+.hljs-dartdoc {
+  color: #887;
+}
+.hljs-javadoctag,
+.hljs-dartdocref {
+  color: #AA9;
+  font-weight: bold;
   font-style: italic
 }
 
@@ -26,8 +36,16 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-subst,
 .hljs-request,
 .hljs-status {
-  color: #333;
+  color: #338;
   font-weight: bold
+}
+.hljs-built_in {
+  color: #333;
+}
+.hljs-type {
+  color: #555;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .hljs-number,
@@ -40,7 +58,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-tag .hljs-value,
 .hljs-phpdoc,
 .tex .hljs-formula {
-  color: #d14
+  color: #A1F;
 }
 
 .hljs-title,
@@ -62,7 +80,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .haskell .hljs-type,
 .vhdl .hljs-literal,
 .tex .hljs-command {
-  color: #458;
+  color: #45F;
   font-weight: bold
 }
 
@@ -85,7 +103,12 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-class {
-  color: #458;
+  color: #45B;
+  font-weight: bold
+}
+
+.hljs-annotation {
+  color: #E85;
   font-weight: bold
 }
 

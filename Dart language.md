@@ -583,7 +583,8 @@ Example:
 
 #### Methods
 
-As in Java, instance methods can access to instance variables and `this`. Like functions, you cannot overload a method (same name, different list of parameters) but you can override an inherited method.
+As in Java, instance methods can access instance variables and `this`.
+Methods cannot be overloaded, but can override an inherited method.
 
 As seen, when we access an instance variable, we do it via implicit accessors. They can be made explicit with `get` and `set` keywords:
 
