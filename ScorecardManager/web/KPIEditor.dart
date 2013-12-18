@@ -1,6 +1,6 @@
 import 'package:polymer/polymer.dart';
 import 'dart:html';
-//import 'RangeSelector.dart';
+import 'models.dart';
 
 /**
  * Scorecard's editor for a KPI.

@@ -1,0 +1,8 @@
+name: ScorecardManager
+description: Manager of scorecards, associating icons to ranges in views
+dependencies:
+   browser: any
+   polymer: any
+transformers:
+- polymer:
+    entry_points: web/index.html

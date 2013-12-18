@@ -1,5 +1,6 @@
 import 'package:polymer/polymer.dart';
 import 'dart:html';
+import 'models.dart';
 
 /**
  * Scorecard range selector.
@@ -15,7 +16,9 @@ class RangeSelector extends PolymerElement
 
 	void handleSelection(Event e, var detail, Node target)
 	{
+		print("handleSelection -> ${e.target} $detail $target");
 		var sel = (e.target as InputElement).value;
+		print("handleSelection -> $sel");
 		selection = int.parse(sel);
 //		dispatchEvent(new CustomEvent('range-icon-select', detail: { "for": rangeIndex, "at": selection }));
 		print("handleSelection -> range-icon-select $rangeIndex");

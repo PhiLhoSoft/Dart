@@ -1,4 +1,5 @@
 import 'package:polymer/polymer.dart';
+import 'models.dart';
 
 /**
  * Scorecard icon list.

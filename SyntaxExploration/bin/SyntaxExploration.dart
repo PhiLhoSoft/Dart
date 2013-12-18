@@ -40,6 +40,12 @@ void main()
 
 	print("---$MULTI_LINE---");
 
+	Map heterogeneous = { 'a': 'X', 5: 'Y', 'b': 3.14 };
+	print(heterogeneous);
+	assert(heterogeneous is Map<String, String>);
+// Will break there!
+//	String hx = heterogeneous['b'];
+
 	foo(314);
 
 	bar(x: 5);

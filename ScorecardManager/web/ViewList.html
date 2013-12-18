@@ -1,4 +1,4 @@
-<polymer-element name="view-list">
+<polymer-element name="view-list" attributes="views">
 	<template>
 		<style>
 			h2
@@ -17,8 +17,8 @@
 		</style>
 		<h2>List of views</h2>
 		<ul>
-			<template repeat="{{view in views}}">
-				<li>{{view}}</li>
+			<template repeat="{{view in views.views}}">
+				<li>{{view.name}}</li>
 			</template>
 		</ul>
 	</template>

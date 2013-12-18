@@ -1,20 +1,10 @@
-body
-{
-	background-color: #F8F8F8;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	line-height: 1.2em;
-	margin: 0;
-	padding: 0;
-}
+<link rel="import" href="ViewList.html">
+<link rel="import" href="KPIEditor.html">
 
-h1, p
-{
-	color: #333;
-}
-
-#scorecard-editor
+<polymer-element name="scorecard-manager">
+	<template>
+		<style>
+#scorecard-manager
 {
 	width: 100%;
 	height: 700px;
@@ -67,3 +57,19 @@ h1, p
 	right: 0;
 	background-color: #EFF;
 }
+		</style>
+
+		<div id="scorecard-manager">
+
+			<div id="header">
+				<h1>Scorecard Manager</h1>
+				<p>Start editing your scorecards!</p>
+			</div>
+			<div id="view-list"><view-list views="{{views}}"></view-list></div>
+			<div id="scorecard-view"><h2>Current scorecard</h2></div>
+			<div id="kpi-editor"><kpi-editor></kpi-editor></div>
+
+		</div>
+	</template>
+	<script type="application/dart" src="ScorecardManager.dart"></script>
+</polymer-element>

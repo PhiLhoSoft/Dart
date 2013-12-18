@@ -25,7 +25,7 @@
 		<div>
 			<h2>Edit KPI</h2>
 			<label for="KPIName">KPI Name: </label><input type="text" name="KPIName" size="30" value="{{kpiName}}"/>
-			<label for="KPIName">Display values: </label><input type="checkbox" name="DisplayValues" checked="{{displayValues}}"/>
+			<label for="DisplayValues">Display values: </label><input type="checkbox" name="DisplayValues" checked="{{displayValues}}"/>
 			<br/>
 			<button on-click="{{addIcon}}">Add icon</button>
 			<label for="RangeNumber">Range Nb: </label><input type="number" name="RangeNumber" min="1" size="2" value="{{typedRangeNb}}" on-change="{{onIconNumberChange}}"/>

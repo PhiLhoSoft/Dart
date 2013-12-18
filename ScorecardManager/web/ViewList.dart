@@ -1,4 +1,5 @@
 import 'package:polymer/polymer.dart';
+import 'models.dart';
 
 /**
  * Scorecard view list.
@@ -6,7 +7,7 @@ import 'package:polymer/polymer.dart';
 @CustomTag('view-list')
 class ViewList extends PolymerElement
 {
-	final List views = toObservable(['First', 'Second', 'Last']);
+	@observable Views views;
 
 	ViewList.created() : super.created() {}
 }
