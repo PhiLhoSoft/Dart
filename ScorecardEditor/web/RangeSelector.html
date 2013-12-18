@@ -17,9 +17,8 @@
 				line-height: 24px;
 			}
 		</style>
-<!--		<div on-change="{{handleSelection}}" on-reset-range="{{handleReset}}">-->
-		<div>
-			<range-index index={{rangeIndex}}></range-index>
+		<div on-change="{{handleSelection}}" on-reset-range="{{handleReset}}">
+			<range-index rangeIndex={{rangeIndex}}></range-index>
 			<ul>
 				<template repeat="{{icon in icons | enumerate}}">
 					<li><input type="radio" name="range-{{rangeIndex}}" value="{{icon.index}}" checked="{{selection == icon.index}}"/></li>

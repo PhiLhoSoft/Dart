@@ -9,6 +9,10 @@
 			{
 				margin: 10px;
 			}
+			input[type='number']
+			{
+				width: 50px;
+			}
 			.range-list
 			{
 				display: table-row;
@@ -24,13 +28,11 @@
 			<label for="KPIName">Display values: </label><input type="checkbox" name="DisplayValues" checked="{{displayValues}}"/>
 			<br/>
 			<button on-click="{{addIcon}}">Add icon</button>
-			<label for="RangeNumber">Range Nb:</label><input type="number" name="RangeNumber" min="1" size="2" value="{{typedRangeNb}}" on-change="{{onIconNumberChange}}"/>
+			<label for="RangeNumber">Range Nb: </label><input type="number" name="RangeNumber" min="1" size="2" value="{{typedRangeNb}}" on-change="{{onIconNumberChange}}"/>
 			<div class="range-list">
 				<icon-list></icon-list>
-<!--				<template repeat="{{selector in selectors | enumerate}}">
-					<range-selector rangeIndex="{{selector.index}}" selection="false"></range-selector>-->
 				<template repeat="{{selector in selectors | enumerate}}">
-					<range-selector rangeIndex="{{selector.index}}" selection="false"></range-selector>
+					<range-selector rangeIndex="{{selector.index + 1}}" selection="false"></range-selector>
 				</template>
 			</div>
 		</div>

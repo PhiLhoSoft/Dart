@@ -11,12 +11,12 @@ class RangeSelector extends PolymerElement
 	@published int rangeIndex = 0;
 	@published int selection;
 
-	RangeSelector.created() : super.created() { print('Range selector $rangeIndex'); }
+	RangeSelector.created() : super.created() {}
 
 	void handleSelection(Event e, var detail, Node target)
 	{
 		var sel = (e.target as InputElement).value;
-		selection = int.parse(sel) - 1;
+		selection = int.parse(sel);
 //		dispatchEvent(new CustomEvent('range-icon-select', detail: { "for": rangeIndex, "at": selection }));
 		print("handleSelection -> range-icon-select $rangeIndex");
 		dispatchEvent(new CustomEvent('range-icon-select', detail: rangeIndex));
