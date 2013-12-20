@@ -36,15 +36,27 @@ void main()
 {
 	print("Hello, World!");
 
+	void separator(String name) { print("----- $name"); }
+
+
+	separator("Strings");
+
 	print(NO_ESCAPE);
 
 	print("---$MULTI_LINE---");
 
+
+	separator("Literals");
+
 	Map heterogeneous = { 'a': 'X', 5: 'Y', 'b': 3.14 };
 	print(heterogeneous);
+	print(heterogeneous.runtimeType);
 	assert(heterogeneous is Map<String, String>);
 // Will break there!
 //	String hx = heterogeneous['b'];
+
+
+	separator("Functions");
 
 	foo(314);
 
@@ -84,11 +96,24 @@ void main()
 	subv += v1;
 	print("Overridden minus on vector: $subv");
 
+	separator("Accessors");
+
 	Product product = new Product();
 	product.price = 42;
 	print("Price: ${product.priceWithoutVAT} -> ${product.price} with VAT");
 
-	// Mixins
+
+	separator("Interfaces");
+
+	Animal a = new Animal("Jabberwocky");
+	a.speak();
+	Duck d = new Duck()..name = "Donald"; // Of course!
+	d.speak();
+	print(Animal.type);
+//	print(Duck.type); // Not inherited
+
+
+	separator("Mixins");
 
 	Person p1 = new Person("Robert", "Patterson") ..middleName = "Hugh";
 	p1..addressLine1 = "Hollywood Drive" ..postalCode = "4651" ..city = "Los Angeles" ..country = "USA";
@@ -191,12 +216,14 @@ class Animal
 	String name;
 	Animal(this.name);
 	void speak() { print("$name produces a sound!"); }
+	static const String type = "animal";
 }
 
 class Duck implements Animal
 {
-	String name;
-	void speak() { print("$name quacks!"); }
+	String name; // Must be implemented!
+	void speak() { print("$name quacks!"); } // This one too
+	// The constructor isn't part of the interface; neither is the const.
 }
 
 //== Mixin experimentation ==//
