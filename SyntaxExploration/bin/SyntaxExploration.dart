@@ -10,7 +10,7 @@
  * /* See, ma! We can even nest comments! */
  */
 /* File history:
- *  1.00.000 -- 2013/xx/xx (PL) -- Perpetual update!
+ *  1.00.000 -- 2014/xx/xx (PL) -- Perpetual update!
  *  0.00.000 -- 2013/11/18 (PL) -- Creation
  */
 /*
@@ -30,7 +30,8 @@ is spawning several
 \u2661 lines.\u000A
 Using string interpolation: $topLevelVariable and ${2 * topLevelVariable / 3}
 Initial newline is ignored, not the final one.
-""";
+"""
+"This string is added to the previous literal!";
 
 void main()
 {
@@ -127,6 +128,7 @@ void main()
 	print(c); print(c.formattedAddress);
 }
 
+
 void foo(int x) { print("foo: $x"); }
 // Invalid! No function polymorphism / overloading. Use optional parameters...
 //void foo(int x, int y) { print("foo: $x and $y"); }
@@ -180,7 +182,9 @@ String buildWithDefault(String one, [ String two = "Second", String three ])
 	return result;
 }
 
+
 // Testing operator overridding
+
 class Vector
 {
 	final num x;
@@ -201,6 +205,9 @@ class Vector
 	@override String toString() => "($x, $y)";
 }
 
+
+// Getters and setters
+
 class Product
 {
 	static const num VAT = 0.196;
@@ -210,6 +217,9 @@ class Product
 	num get price => priceWithoutVAT * (1 + VAT);
 	set price(num p) => priceWithoutVAT = p / (1 + VAT);
 }
+
+
+// Class as interface
 
 class Animal
 {
@@ -226,7 +236,8 @@ class Duck implements Animal
 	// The constructor isn't part of the interface; neither is the const.
 }
 
-//== Mixin experimentation ==//
+
+// Mixin experimentation
 
 abstract class NameBrick // Mixin. abstract is not mandatory but makes sense...
 {
