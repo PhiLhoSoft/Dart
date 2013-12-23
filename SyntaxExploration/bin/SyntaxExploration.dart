@@ -23,7 +23,7 @@ Copyright (c) 2013 Philippe Lhoste / PhiLhoSoft
 
 int topLevelVariable = 42;
 const String IMMUTABLE = "Immutable";
-const NO_ESCAPE = r"Nothing\nCan Escape\u000AFrom Here!\n$IMMUTABLE";
+const NO_ESCAPE = r"Nothing\nCan Escape\u000AFrom Here!\n$IMMUTABLE\";
 final String MULTI_LINE = """
 This string
 is spawning several

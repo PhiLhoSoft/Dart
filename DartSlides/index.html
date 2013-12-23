@@ -1358,6 +1358,37 @@ Playground...
 ##### h5
 ###### h6
 </script></section>
+<section data-markdown><script type="text/template">
+#### Metadata creation
+````dart
+library stuff;
+
+class Stuff
+{
+  final int var = 5;
+  final int var1 = 6;
+  final String a$_ = "foo$var$var1\"bar";
+  final String _$b = 'bar\'foo${var1 * 7}';
+  final String $c_1 = """line one\"""
+$var -- ${4 * var / 3}
+line two""";
+  final String $c_2 = '''One\'''
+Two''';
+  final String d$d = r"dfdf\" r'mlm';
+
+  /* Const constructor /* Non comment */ Nesting */
+  const todo(this.owner, this.task);
+}
+
+import 'todo.dart'
+
+@todo('somebody', 'This should work!')
+void muddleAround()
+{
+  trySomething();
+}
+````
+</script></section>
 				</section>
 			</div>
 

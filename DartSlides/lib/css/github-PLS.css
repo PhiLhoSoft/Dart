@@ -61,6 +61,10 @@ Changes by PhiLho (c) Philippe Lhoste <PhiLho(a)GMX.net>
   color: #A1F;
 }
 
+.hljs-interpolation {
+  color: #55F;
+}
+
 .hljs-title,
 .hljs-id,
 .coffeescript .hljs-params,
