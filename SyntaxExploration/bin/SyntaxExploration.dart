@@ -44,7 +44,7 @@ void main()
 
 	print(NO_ESCAPE);
 
-	print("---$MULTI_LINE---");
+	print("<<<$MULTI_LINE>>>");
 
 
 	separator("Literals");
@@ -55,6 +55,18 @@ void main()
 	assert(heterogeneous is Map<String, String>);
 // Will break there!
 //	String hx = heterogeneous['b'];
+
+
+	separator("Operators");
+
+	int iv = 42;
+	double dv = 42.0;
+	int r1 = iv ~/ 11;
+	int r2 = dv ~/ 11;
+	int r3 = dv ~/ 11.0;
+// Invalid, cannot assign an int to a double without a cast (annoying...)
+//	double r3 = dv ~/ 11;
+	print("Integer divisions: r1=$r1 r2=$r2 r3=$r3");
 
 
 	separator("Functions");
@@ -87,15 +99,19 @@ void main()
 	assert(f1 == f3);
 
 	// Function overridding
-	final v1 = new Vector(1, 2);
+	final v1 = const Vector(1, 2);
 	final v2 = new Vector(5, 7);
+
+	assert(identical(v1, const Vector(1, 2))); // Same instance
+	assert(identical(const Vector(0, 0), Vector.origin));
 
 	assert(v1.x == 1 && v1.y == 2);
 	assert((v1 + v2).x == 6 && (v1 + v2).y == 9);
 	assert((v2 - v1).x == 4 && (v2 - v1).y == 5);
 	var subv = new Vector(3.14, 2.71);
-	subv += v1;
+	subv -= v1;
 	print("Overridden minus on vector: $subv");
+
 
 	separator("Accessors");
 
@@ -191,6 +207,8 @@ class Vector
 	final num y;
 
 	const Vector(this.x, this.y);
+
+  static final Vector origin = const Vector(0, 0);
 
 	@override Vector operator +(Vector v) // Add two vectors
 	{
