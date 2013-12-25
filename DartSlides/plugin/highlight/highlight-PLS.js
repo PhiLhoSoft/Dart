@@ -756,8 +756,8 @@ hljs.LANGUAGES.dart = function (_hljs)
 		relevance: 10,
 		variants:
 		[
-			{ begin: '\\$\\w', end: '\\w\\b' },
-			{ begin: '\\$\\{', end: '\\}' }
+			{ begin: '\\$\\{', end: '\\}' },
+			{ begin: '\\$(?!=\\w)', end: '\\w\\b' }
 		]
 	};
 	return {

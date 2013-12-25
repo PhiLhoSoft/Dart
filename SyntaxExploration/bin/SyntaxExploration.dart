@@ -145,6 +145,8 @@ void main()
 }
 
 
+// Functions
+
 void foo(int x) { print("foo: $x"); }
 // Invalid! No function polymorphism / overloading. Use optional parameters...
 //void foo(int x, int y) { print("foo: $x and $y"); }
@@ -300,4 +302,30 @@ class Person extends Object with HumanNameBrick, AddressBrick  // The class to e
   }
 
   @override String toString() => "My name is $lastName, $fullName.";
+}
+
+
+/// Non-sense, pushing syntax to the limits, to stress syntax highlighter...
+/// [Stuff] uses [variable] and [otherVariable] too.
+
+abstract class Stuff extends Animal with NameBrick implements Product, Vector
+{
+	static int variable = 5, otherVariable = 6, z = 5;
+	// $ is legal in identifiers
+	String a$_ = "foo$variable$otherVariable\"$z bar";
+	String _$b = 'bar\$\'foo${otherVariable * 7}';
+	String $c_1 = """line one\"""
+$variable -#- ${4 * variable / 3}
+line two""";
+	final String $c_2 = '''One\'''
+\u2661 line with Unicode \u000A
+Two''';
+	final String d$d = r"d$z.f\" r'm${not interpolation}m';
+
+	/* A constructor /* Non /**/ comment */ Nesting /***/ block /****/ comments! */
+	Stuff(this.a$_, this._$b) : super('Natural');
+	/** This creates a default [Stuff] object. */
+	Stuff.defaultObject() : this(3.14.toString(), 42.toString());
+
+	@override toString() => a$_;
 }
