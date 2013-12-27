@@ -1,6 +1,10 @@
 <polymer-element name="icon-list">
 	<template>
 		<style>
+			.title
+			{
+				line-height: 24px;
+			}
 			ul
 			{
 				text-align: center;
@@ -8,12 +12,13 @@
 			}
 			li
 			{
-				font-size: 18pt;
 				list-style-type: none;
+				font-size: 24px;
+				line-height: 24px;
 			}
 		</style>
 		<div>
-			<p>Icons</p>
+			<p class="title">Icons</p>
 			<ul>
 				<template repeat="{{icon in icons}}">
 					<li><i class="fa fa-{{icon}}"></i></li>

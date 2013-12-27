@@ -1,29 +1,13 @@
 <link rel="import" href="RangeIndex.html">
+<link rel="import" href="RadioButtonGroup.html">
 
-<polymer-element name="range-selector" attributes="rangeIndex, selection">
+<polymer-element name="range-selector" attributes="rangeIndex selection">
 	<template>
 		<style>
-			div
-			{
-			}
-			ul
-			{
-				text-align: center;
-				padding-left: 0;
-			}
-			li
-			{
-				list-style-type: none;
-				line-height: 24px;
-			}
 		</style>
-		<div on-change="{{handleSelection}}" on-reset-range="{{handleReset}}">
+		<div>
 			<range-index rangeIndex={{rangeIndex}}></range-index>
-			<ul>
-				<template repeat="{{icon in icons | enumerate}}">
-					<li><input type="radio" name="range-{{rangeIndex}}" value="{{icon.index}}" checked="{{selection == icon.index}}"/></li>
-				</template>
-			</ul>
+			<radio-button-group name="rbg-{{rangeIndex.toString()}}" on-change="{{handleSelection}}"></radio-button-group>
 		</div>
 	</template>
 	<script type="application/dart" src="RangeSelector.dart"></script>

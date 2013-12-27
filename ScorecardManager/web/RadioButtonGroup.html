@@ -1,0 +1,27 @@
+<link rel="import" href="RadioButton.html">
+
+<polymer-element name="radio-button-group" attributes="name selection">
+	<template>
+		<style>
+			ul
+			{
+				text-align: center;
+				padding-left: 0;
+			}
+			li
+			{
+				list-style-type: none;
+				font-size: 16px;
+				line-height: 24px;
+			}
+		</style>
+		<ul on-radio-button-select="{{handleSelection}}">
+			<template repeat="{{button in buttons | enumerate}}">
+				<li>
+					<radio-button group="{{name}}" position="{{button.index}}" selected="{{selection == button.index}}"></radio-button>
+				</li>
+			</template>
+		</ul>
+	</template>
+	<script type="application/dart" src="RadioButtonGroup.dart"></script>
+</polymer-element>
