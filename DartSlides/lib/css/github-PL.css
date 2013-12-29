@@ -1,6 +1,7 @@
 /*
 
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+github.com style for highlight.js (c) Vasily Polovnyov <vast@whiteants.net>
+Changes (including new Dart classes) by PhiLho (c) Philippe Lhoste <PhiLho(a)GMX.net>
 
 */
 
@@ -12,9 +13,18 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 pre .comment,
 pre .template_comment,
-pre .diff .header,
-pre .javadoc {
+pre .diff .header {
   color: #998;
+  font-family: 'Open Sans', sans-serif;
+}
+pre .javadoc,
+pre .dartdoc {
+  color: #887;
+}
+pre .javadoctag,
+pre .dartdocref {
+  color: #AA9;
+  font-weight: bold;
   font-style: italic
 }
 
@@ -26,8 +36,16 @@ pre .nginx .title,
 pre .subst,
 pre .request,
 pre .status {
-  color: #333;
+  color: #338;
   font-weight: bold
+}
+pre .built_in {
+  color: #333;
+}
+pre .type {
+  color: #555;
+  font-weight: bold;
+  font-style: italic;
 }
 
 pre .number,
@@ -40,7 +58,11 @@ pre .string,
 pre .tag .value,
 pre .phpdoc,
 pre .tex .formula {
-  color: #A1F
+  color: #A1F;
+}
+
+pre .interpolation {
+  color: #55F;
 }
 
 pre .title,
@@ -62,7 +84,7 @@ pre .class .title,
 pre .haskell .type,
 pre .vhdl .literal,
 pre .tex .command {
-  color: #458;
+  color: #45F;
   font-weight: bold
 }
 
