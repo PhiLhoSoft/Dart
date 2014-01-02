@@ -142,6 +142,21 @@ void main()
 	Company c = new Company("42-31415", "Roundabout Ltd");
 	c..addressLine1 = "Muholland Drive" ..postalCode = "4670" ..city = "Hollywood" ..country = "USA";
 	print(c); print(c.formattedAddress);
+
+	void newScope()
+	{
+		separator("for-loop closures");
+		var closures = [];
+		for (int i = 1, j = 100; i < 5; i++, j -= 10)
+		{
+			closures.add((v) => j + i * v);
+		}
+		for (var f in closures)
+		{
+			print(f(3));
+		}
+	}
+	newScope();
 }
 
 

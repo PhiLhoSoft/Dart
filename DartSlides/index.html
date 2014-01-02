@@ -36,9 +36,10 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h1>Dart&nbsp;language<br/>for<br/>Java&nbsp;programmers</h1>
-				</section>
+
+<section data-markdown><script type="text/template">
+# Dart&nbsp;language<br/>for<br/>Java&nbsp;programmers
+</script></section>
 
 				<section>
 
@@ -105,7 +106,7 @@ class Employee extends Person implements HasId
   // id is automatically assigned, name is transmitted to super-class's constructor
   Employee(String name, this.id) : super.named(name);
 
-  // Define getters and setters for salary. Still used as e.salary access.
+  // Define getters and setters for salary. Still accessed as e.salary.
   int get salary => _salary;
   set salary(int s) => _salary = s < Salary.MINIMUM ? Salary.MINIMUM : s;
   // This one calls the setter behind the scene!
@@ -137,9 +138,9 @@ abstract class HasId { String id; } // Interface definition. Automatically defin
 
 class Person { final String name; Person.named(this.name); } // Named constructor
 
-class Salary { static const int MINIMUM = 2000; }
+class Salary { static const int MINIMUM = 2000; } // Compile-time constant
 
-class Department
+class Department // Close of a Java enum
 {
   final String name;
 
@@ -175,12 +176,13 @@ It just reached the version 1.0 (November 2013), implying a stabilization of syn
 #### Typing
 Dart can be strongly typed, allowing good tool support. It can be run on a specific VM or it can be compiled (or, rather, transcripted) to JavaScript, allowing to run it in any Web browser.
 
-On the VM, it is in checked mode, strongly typed.
-Translated to JS, it is in production mode, as weakly typed as this language.
+On the VM, it is in *checked mode*, with strong type checking.
 
-The former allows debugging and checks, like asserts; the later is faster and runs on all browsers.
+Translated to JS, it is in *production mode*, as weakly typed as this language.
 
-Typing is optional, even in checked mode, giving the advantages of quick development of dynamic languages.
+The former is faster and allows debugging and checks, like asserts; the later is faster than pure JavaScript and runs on all browsers. Checked mode (on the VM) alllows to make command-line and server-side Dart applications.
+
+Typing is optional, even in checked mode (dynamic typing), giving the advantages of quick development of dynamic languages.
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -208,6 +210,18 @@ The language and goals are close of those of GWT, so GWT developers wondered if 
 Google told that GWT was used inside the company's projects, and unlikely to disappear.
 
 GWT mostly aims at Java programmers not wanting to learn a new language, so Dart covers a different ground.
+
+Note there is a DWT project porting GWT to the Dart language...
+</script></section>
+
+<section data-markdown><script type="text/template">
+#### Dart popularity
+
+Dart is still a young language, but followed by numerous developpers, lot of them contributing packages to the official repository.
+
+Google+ accounts: Dart is followed by 50,000+ persons, Dartisans by nearly 5,000 persons and the French account Dartlang [FR] by nearly 2,000 persons.
+
+GWT uses it for its client relation tracking and Google Elections.
 </script></section>
 
 				</section>
@@ -263,7 +277,7 @@ Dart also manages exceptions with `try / catch / finally`.
 <section data-markdown><script type="text/template">
 ### Classes and interfaces
 
-Dart use the same syntax for classes than Java.. They can be abstract. Interfaces are made of function signatures. Classes can implement one or more interfaces and can extend one class. They can use generic types (same base syntax than Java).
+Dart use the Java syntax for classes.. They can be abstract. Interfaces are made of function signatures. Classes can implement one or more interfaces and can extend one class. They can use generic types, with same base syntax as Java.
 
 A constructor can call another with `this()` and can call the parent's constructor with `super()`. Constructors are not inherited. They automatically call the parameterless super constructor.
 Overridden methods can be marked with the `@override` annotation (lowercase!).
@@ -379,10 +393,15 @@ Final newline is included -->
 <section data-markdown><script type="text/template">
 #### Lists
 
-Are extensible arrays, ordered group of objects. They have the same syntax than Java's arrays (0-based, indexing, .length) but literals look like JavaScript:
+Are extensible arrays, ordered group of objects. They have the same syntax as Java's arrays (0-based, indexing, .length) but literals look like JavaScript:
 ````dart
 var list = [ 1, 3, 5, 7 ];
 ````
+A list declared as
+````dart
+var list = new List(5);
+````
+has a fixed size.
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -667,7 +686,7 @@ All Dart apps have a top-level `main()` function, entry point to the application
 
 Functions are first-class objects, ie. they can be assigned to a variable, passed as function parameter, stored in a collection, etc.
 
-Functions can be defined inside another function. They can be named (the name is the actually the name of the variable they are stored in) or anonymous.
+Functions can be defined inside another function. They can be named (declaring a final variable with that name) or anonymous.
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -725,6 +744,24 @@ main()
 The `prefixer()` closes over the `prefix` parameter, it is associated with its value when it is returned.
 </script></section>
 
+<section data-markdown><script type="text/template">
+#### Closures over for-loop
+
+Functions can also close over the iteration variables of a for loop, as if they were function parameters.
+````dart
+  var closures = [];
+  for (int i = 1, j = 100; i < 5; i++, j -= 10)
+  {
+    closures.add((v) => j + i * v);
+  }
+  for (var f in closures)
+  {
+    print(f(3));
+  }
+````
+Prints out 103,96, 89, 82
+</script></section>
+
 </section>
 
 <section>
@@ -768,7 +805,7 @@ class Point
   }
 }
 ````
-As in Java, style guide recommends to use `this` only to disambiguate variable names.
+As in Java, the style guide recommends using `this` only to disambiguate variable names.
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -876,7 +913,7 @@ They are created by using `const` instead of `new`.
 ````dart
 var p = const FixedPoint(1, 2);
 ````
-Such constant can be used as default value for optional parameters. Their instance is unique:
+Such constants can be used as default value for optional parameters. Identical constants are the same object:
 ````dart
 var q = const FixedPoint(1, 2);
 assert(identical(p, q)); // Same instance
@@ -887,7 +924,7 @@ assert(identical(const FixedPoint(0, 0), FixedPoint.origin));
 <section data-markdown><script type="text/template">
 ##### Factory constructors
 
-The `factory` keyword allows to implement a constructor that might create a new instance, but also that can return an instance from a cache, return an instance of a subtype, etc.
+The `factory` keyword allows implementing a constructor that might create a new instance, or might instead return an instance from a cache, an instance of a subtype, etc.
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -931,7 +968,7 @@ Methods cannot be overloaded, but can override an inherited method.
 <section data-markdown><script type="text/template">
 #### Accessors
 
-As seen, when we access an instance variable, we do it via implicit accessors. They can be made explicit with `get` and `set` keywords.
+As seen, when we access an instance variable, we do it via implicit accessors. They can be made explicit with the `get` and `set` keywords.
 ````dart
 class Product
 {
@@ -1280,7 +1317,7 @@ main()
 Dart supports metadata, equivalent to Java's annotations, allowing to add information to code.
 Notation is `@metadata` where `metadata` is a constant or a class with a constant constructor.
 
-Dart has three built-in metadata: `@deprecated`, `@override` and `@proxy`.
+Dart has three built-in annotations: `@deprecated`, `@override` and `@proxy`.
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -1325,11 +1362,11 @@ This metadata can be used via introspection (`mirrors` library).
 
 The creators of the language admit themselves it is a plain old, a bit boring, language: it doesn't have new, exciting features like multiple return values (Lua), syntax sugar to make DSLs (Scala), advanced meta-programming (Nemerle) and similar.
 
-Yet, it builds on a time-prouved syntax, familiar to lot of developers, with some goodies to avoid verbosity, nice features like mixins and functions as first-class objects, and so on.
+Yet, it builds on a time-proved syntax, familiar to lot of developers, with some goodies to avoid verbosity, nice features like mixins and functions as first-class objects, and so on.
 
 Its original goal to be supported natively in browsers was seen with skepticism, but the conversion to JS is effective, generating fast code!
 
-So it is a very serious candidate for Web app dev., allowing to code in a safer, more robust way with excellent performance.
+So it is a very serious candidate for Web app dev., allowing coding in a safer, more robust way with excellent performance.
 </script></section>
 
 				<section data-background="BlueMoon.jpg">
