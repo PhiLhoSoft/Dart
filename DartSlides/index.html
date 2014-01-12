@@ -747,7 +747,7 @@ The `prefixer()` closes over the `prefix` parameter, it is associated with its v
 <section data-markdown><script type="text/template">
 #### Closures over for-loop
 
-Functions can also close over the iteration variables of a for loop, as if they were function parameters.
+Iteration variables of a for loop are part of the scope of its block so functions can close over them.
 ````dart
   var closures = [];
   for (int i = 1, j = 100; i < 5; i++, j -= 10)

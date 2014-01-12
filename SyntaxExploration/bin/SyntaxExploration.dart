@@ -18,7 +18,7 @@ Author: Philippe Lhoste <PhiLho(a)GMX.net> http://Phi.Lho.free.fr
 Copyright notice: For details, see the following file:
 http://Phi.Lho.free.fr/softwares/PhiLhoSoft/PhiLhoSoftLicense.txt
 This program is distributed under the zlib/libpng license.
-Copyright (c) 2013 Philippe Lhoste / PhiLhoSoft
+Copyright (c) 2013-2014 Philippe Lhoste / PhiLhoSoft
 */
 
 int topLevelVariable = 42;
@@ -149,7 +149,13 @@ void main()
 		var closures = [];
 		for (int i = 1, j = 100; i < 5; i++, j -= 10)
 		{
+			// for-loop variables are within the scope of this block, therefore can be captured.
 			closures.add((v) => j + i * v);
+		}
+		{
+			// Sub-scope!
+			String s = "foo-";
+			closures.add((v) => s + v.toString());
 		}
 		for (var f in closures)
 		{
@@ -322,7 +328,6 @@ class Person extends Object with HumanNameBrick, AddressBrick  // The class to e
 
 /// Non-sense, pushing syntax to the limits, to stress syntax highlighter...
 /// [Stuff] uses [variable] and [otherVariable] too.
-
 abstract class Stuff extends Animal with NameBrick implements Product, Vector
 {
 	static int variable = 5, otherVariable = 6, z = 5;
