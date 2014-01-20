@@ -68,14 +68,16 @@ pre .interpolation {
 pre .title,
 pre .id,
 pre .coffeescript .params,
+pre .dart .class .title,
 pre .scss .preprocessor {
-  color: #900;
+  color: #45F;
   font-weight: bold
 }
 
 pre .javascript .title,
 pre .lisp .title,
 pre .clojure .title,
+pre .dart .title,
 pre .subst {
   font-weight: normal
 }

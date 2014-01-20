@@ -63,20 +63,21 @@ Changes (including new Dart classes) by PhiLho (c) Philippe Lhoste <PhiLho(a)GMX
 }
 
 .hljs-interpolation {
-  color: #55F;
+  color: #88F;
 }
 
 .hljs-title,
 .hljs-id,
 .coffeescript .hljs-params,
 .scss .hljs-preprocessor {
-  color: #900;
+  color: #45F;
   font-weight: bold
 }
 
 .javascript .hljs-title,
 .lisp .hljs-title,
 .clojure .hljs-title,
+.dart .hljs-title,
 .hljs-subst {
   font-weight: normal
 }

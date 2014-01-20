@@ -742,11 +742,13 @@ hljs.LANGUAGES.java = function (_hljs)
 
 hljs.LANGUAGES.dart = function (_hljs)
 {
-	var IDENTIFIER = /[a-zA-Z_$][a-zA-Z0-9_$]*/;
+	var IDENTIFIER = '[a-zA-Z_$][a-zA-Z0-9_$]*';
+	var DART_DOC_REF = '(^|\\s)\\[\\w+\\]';
 	var OPENING_BLOCK_COMMENT = '/\\*';
 	var CLOSING_BLOCK_COMMENT = '\\*/';
 	var BLOCK_COMMENT =
 	{
+		className: 'comment',
 		begin: OPENING_BLOCK_COMMENT, end: CLOSING_BLOCK_COMMENT,
 		contains: ['self']
 	};
@@ -759,6 +761,12 @@ hljs.LANGUAGES.dart = function (_hljs)
 			{ begin: '\\$\\{', end: '\\}' },
 			{ begin: '\\$(?!=\\w)', end: '\\w\\b' }
 		]
+	};
+	var TITLE =
+	{
+		className: 'title',
+		begin: IDENTIFIER,
+		relevance: 0
 	};
 	return {
 		lexemes: IDENTIFIER,
@@ -777,20 +785,22 @@ hljs.LANGUAGES.dart = function (_hljs)
 		contains:
 		[
 			{
-				className: 'dartdoc',
+				className: 'javadoc', //  was dartdoc, but better use a relatively standard name
 				begin: '/\\*\\*', end: '\\*/',
 				contains:
 				[{
-					className: 'dartdocref', begin: '(^|\\s)\\[\\w+\\]'
+					className: 'javadoctag', // was dartdocref, see above...
+					begin: DART_DOC_REF
 				}],
 				relevance: 7
 			},
 			{
-				className: 'dartdoc',
+				className: 'javadoc',
 				begin: '///', end: '$',
 				contains:
 				[{
-					className: 'dartdocref', begin: '(^|\\s)\\[\\w+\\]'
+					className: 'javadoctag',
+					begin: DART_DOC_REF
 				}],
 				relevance: 10
 			},
@@ -816,7 +826,7 @@ hljs.LANGUAGES.dart = function (_hljs)
 			},
 			{
 				className: 'string',
-				contains: [_hljs.BACKSLASH_ESCAPE, INTERPOLATION],
+				contains: [ _hljs.BACKSLASH_ESCAPE, INTERPOLATION ],
 				relevance: 10,
 				variants:
 				[
@@ -826,7 +836,8 @@ hljs.LANGUAGES.dart = function (_hljs)
 			},
 			{
 				className: 'class',
-				beginKeywords: 'class interface', end: '{',
+				beginKeywords: 'class interface',
+				end: '{',
 				excludeEnd: true,
 				illegal: ':',
 				contains:
@@ -835,27 +846,23 @@ hljs.LANGUAGES.dart = function (_hljs)
 						beginKeywords: 'extends implements with|10',
 						relevance: 7
 					},
-					{
-						className: 'title',
-						begin: IDENTIFIER
-					},
+					TITLE,
 					_hljs.C_LINE_COMMENT_MODE,
-					_hljs.C_BLOCK_COMMENT_MODE
+					BLOCK_COMMENT
 				]
+			},
+			{
+				begin: IDENTIFIER + '\\s*\\(',
+				returnBegin: true,
+				contains: [ TITLE ]
 			},
 			{
 				className: 'annotation',
 				begin: '@[A-Za-z]+',
 				relevance: 7
 			},
+			BLOCK_COMMENT,
 			_hljs.C_LINE_COMMENT_MODE,
-			{
-				className: 'comment',
-				begin: OPENING_BLOCK_COMMENT, end: CLOSING_BLOCK_COMMENT,
-				contains: [BLOCK_COMMENT]
-			},
-			_hljs.APOS_STRING_MODE,
-			_hljs.QUOTE_STRING_MODE,
 			_hljs.C_NUMBER_MODE
 		]
 	};

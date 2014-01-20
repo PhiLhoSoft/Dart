@@ -1,15 +1,19 @@
 /*
 Language: Dart
 Author: PhiLho (Philippe Lhoste) <PhiLho(a)GMX.net>
+Description: Dart is a new platform for scalable web app engineering. https://www.dartlang.org/
 */
 
 function(hljs)
 {
-	var IDENTIFIER = /[a-zA-Z_$][a-zA-Z0-9_$]*/;
+
+	var IDENTIFIER = '[a-zA-Z_$][a-zA-Z0-9_$]*';
+	var DART_DOC_REF = '(^|\\s)\\[\\w+\\]';
 	var OPENING_BLOCK_COMMENT = '/\\*';
 	var CLOSING_BLOCK_COMMENT = '\\*/';
 	var BLOCK_COMMENT =
 	{
+		className: 'comment',
 		begin: OPENING_BLOCK_COMMENT, end: CLOSING_BLOCK_COMMENT,
 		contains: ['self']
 	};
@@ -22,6 +26,12 @@ function(hljs)
 			{ begin: '\\$\\{', end: '\\}' },
 			{ begin: '\\$(?!=\\w)', end: '\\w\\b' }
 		]
+	};
+	var TITLE =
+	{
+		className: 'title',
+		begin: IDENTIFIER,
+		relevance: 0
 	};
 	return {
 		lexemes: IDENTIFIER,
@@ -40,20 +50,22 @@ function(hljs)
 		contains:
 		[
 			{
-				className: 'dartdoc',
+				className: 'javadoc', //  was dartdoc, but better use a relatively standard name
 				begin: '/\\*\\*', end: '\\*/',
 				contains:
 				[{
-					className: 'dartdocref', begin: '(^|\\s)\\[\\w+\\]'
+					className: 'javadoctag', // was dartdocref, see above...
+					begin: DART_DOC_REF
 				}],
 				relevance: 7
 			},
 			{
-				className: 'dartdoc',
+				className: 'javadoc',
 				begin: '///', end: '$',
 				contains:
 				[{
-					className: 'dartdocref', begin: '(^|\\s)\\[\\w+\\]'
+					className: 'javadoctag',
+					begin: DART_DOC_REF
 				}],
 				relevance: 10
 			},
@@ -89,7 +101,8 @@ function(hljs)
 			},
 			{
 				className: 'class',
-				beginKeywords: 'class interface', end: '{',
+				beginKeywords: 'class interface',
+				end: '{',
 				excludeEnd: true,
 				illegal: ':',
 				contains:
@@ -98,27 +111,23 @@ function(hljs)
 						beginKeywords: 'extends implements with|10',
 						relevance: 7
 					},
-					{
-						className: 'title',
-						begin: IDENTIFIER
-					},
+					TITLE,
 					hljs.C_LINE_COMMENT_MODE,
-					hljs.C_BLOCK_COMMENT_MODE
+					BLOCK_COMMENT
 				]
+			},
+			{
+				begin: IDENTIFIER + '\\s*\\(',
+				returnBegin: true,
+				contains: [ TITLE ]
 			},
 			{
 				className: 'annotation',
 				begin: '@[A-Za-z]+',
 				relevance: 7
 			},
+			BLOCK_COMMENT,
 			hljs.C_LINE_COMMENT_MODE,
-			{
-				className: 'comment',
-				begin: OPENING_BLOCK_COMMENT, end: CLOSING_BLOCK_COMMENT,
-				contains: [BLOCK_COMMENT]
-			},
-			hljs.APOS_STRING_MODE,
-			hljs.QUOTE_STRING_MODE,
 			hljs.C_NUMBER_MODE
 		]
 	};

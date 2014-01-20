@@ -163,6 +163,10 @@ void main()
 		}
 	}
 	newScope();
+
+	separator("Syntax stuff");
+	Stuff stuff = new RealStuff();
+	print("Real stuff is $stuff");
 }
 
 
@@ -331,8 +335,8 @@ class Person extends Object with HumanNameBrick, AddressBrick  // The class to e
 abstract class Stuff extends Animal with NameBrick implements Product, Vector
 {
 	static int variable = 5, otherVariable = 6, z = 5;
-	// $ is legal in identifiers
-	String a$_ = "foo$variable$otherVariable\"$z bar";
+	// $ is legal in identifiers, like in Java (and not recommended, like in Java!)
+	String a$_ = "foo$variable$otherVariable\"$z bar, and ${addFrenchQuotes('I am French')}";
 	String _$b = 'bar\$\'foo${otherVariable * 7}';
 	String $c_1 = """line one\"""
 $variable -#- ${4 * variable / 3}
@@ -343,9 +347,16 @@ Two''';
 	final String d$d = r"d$z.f\" r'm${not interpolation}m';
 
 	/* A constructor /* Non /**/ comment */ Nesting /***/ block /****/ comments! */
-	Stuff(this.a$_, this._$b) : super('Natural');
+	Stuff(this._$b, this.$c_1) : super('Natural');
 	/** This creates a default [Stuff] object. */
 	Stuff.defaultObject() : this(3.14.toString(), 42.toString());
 
+	static String addFrenchQuotes(String input) { return "« $input »"; }
+
 	@override toString() => a$_;
 }
+class RealStuff extends Stuff
+{
+	RealStuff(): super.defaultObject();
+}
+
