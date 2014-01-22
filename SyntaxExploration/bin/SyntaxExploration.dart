@@ -21,6 +21,8 @@ This program is distributed under the zlib/libpng license.
 Copyright (c) 2013-2014 Philippe Lhoste / PhiLhoSoft
 */
 
+import 'dart:mirrors';
+
 int topLevelVariable = 42;
 const String IMMUTABLE = "Immutable";
 const NO_ESCAPE = r"Nothing\nCan Escape\u000AFrom Here!\n$IMMUTABLE\";
@@ -166,7 +168,12 @@ void main()
 
 	separator("Syntax stuff");
 	Stuff stuff = new RealStuff();
-	print("Real stuff is $stuff");
+	print("""Real stuff is $stuff
+Parts are:
+${stuff.$c_1}
+and
+${stuff.$c_2}
+""");
 }
 
 
@@ -335,27 +342,27 @@ class Person extends Object with HumanNameBrick, AddressBrick  // The class to e
 abstract class Stuff extends Animal with NameBrick implements Product, Vector
 {
 	static int variable = 5, otherVariable = 6, z = 5;
+	static var sym = #someSymbol;
 	// $ is legal in identifiers, like in Java (and not recommended, like in Java!)
-	String a$_ = "foo$variable$otherVariable\"$z bar, and ${addFrenchQuotes('I am French')}";
-	String _$b = 'bar\$\'foo${otherVariable * 7}';
-	String $c_1 = """line one\"""
-$variable -#- ${4 * variable / 3}
-line two""";
+	String a$_ = "foo-${symbolToString(sym)}\"$z bar, and ${addFrenchQuotes('I am French')}";
+	String _$b = 'bar\$\'foo${otherVariable * 7}', b_$ = "";
+	final String $c_1 = """line one\"""
+$variable$otherVariable -#- ${4 * variable / 3} - line two""";
 	final String $c_2 = '''One\'''
-\u2661 line with Unicode \u000A
-Two''';
-	final String d$d = r"d$z.f\" r'm${not interpolation}m';
+\u2661 line with Unicode \u000ATwo''';
+	static const String d$d = r"d$z.f\" r'm${not interpolation}m';
 
 	/* A constructor /* Non /**/ comment */ Nesting /***/ block /****/ comments! */
-	Stuff(this._$b, this.$c_1) : super('Natural');
+	Stuff(this._$b, this.b_$) : super('Natural');
 	/** This creates a default [Stuff] object. */
 	Stuff.defaultObject() : this(3.14.toString(), 42.toString());
 
 	static String addFrenchQuotes(String input) { return "« $input »"; }
+	static String symbolToString(Symbol s) { return MirrorSystem.getName(s); }
 
-	@override toString() => a$_;
+	@override toString() => a$_ + d$d;
 }
-class RealStuff extends Stuff
+class RealStuff extends Stuff // Just omit to declare the interfaces' stuff
 {
 	RealStuff(): super.defaultObject();
 }
