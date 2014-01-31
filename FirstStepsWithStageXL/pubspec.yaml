@@ -1,0 +1,6 @@
+name: FirstStepsWithStageXL
+author: PhiLho
+description: First steps with StageXL
+dependencies:
+  browser: any
+  stagexl: any
